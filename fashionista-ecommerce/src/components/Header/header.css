@@ -1,0 +1,44 @@
+.header-container {
+    width: 100%;
+    height: 50px;
+    padding: 10px 30px;
+    margin: 0 auto;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    z-index: 1;
+    border-bottom: 1px solid #41414d;
+}
+
+.header-container h1 {
+    font-weight: 400;
+}
+
+.header-container a {
+    color: #41414d;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.icons-container {
+    width: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.icons-container svg {
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+}
+
+.icons-container svg {
+    transition: all 0.2s ease-in-out;
+}
+
+.icons-container svg:hover {
+    opacity: 0.6;
+}

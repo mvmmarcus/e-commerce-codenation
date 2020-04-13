@@ -1,0 +1,101 @@
+.container h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: #41414d;
+    margin: 50px 20px auto;
+}
+
+.catalog-container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.catalog-container span {
+    text-align: center;
+    padding: 10px 0;
+}
+
+.catalog-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.catalog-list-item {
+    width: 100%;
+    max-width: 300px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.product-poster {
+    width: 100%;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    cursor: pointer;
+}
+
+.product-poster img {
+    width: 100%;
+    height: auto;
+    transition: transform .3s;
+}
+
+.product-poster:hover img {
+    transform: scale(1.2);
+}
+
+.product-promo-seal {
+    background: #41414d;
+    color: #fff;
+    width: 15%;
+    height: auto;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    text-align: center;
+}
+
+.product-poster-info {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    line-height: 15px;
+}
+
+.product-poster-info strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.product-poster-info span {
+    display: inline-block;
+}
+
+.product-value {
+    color: #ccc;
+    text-decoration: line-through;
+    margin-right: 20px;
+}
+
+.product-promo-value {
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,0 +1,37 @@
+.footer-container {
+  width: 100%;
+  padding: 10px 30px;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #41414d;
+}
+
+.footer-container h1 {
+  color: #41414d;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.footer-container div {
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.icons-container a {
+  margin: 0;
+  padding: 5px;
+}
+
+.icons-container a svg {
+  transition: all 0.2s ease-in-out;
+}
+
+.icons-container a:hover {
+  opacity: 0.6;
+}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./header.css";
 
-export default function Header({ onClick }) {
+export default function Header({ handleBagIcon, handleSearchIcon }) {
   return (
     <div className="header-container">
       <>
@@ -12,10 +12,12 @@ export default function Header({ onClick }) {
           <h1>Fashionista</h1>
         </Link>
         <div className="icons-container" >
-          <FiSearch size={28} color="#000" />
+          <FiSearch 
+          onClick={handleSearchIcon}
+          size={28} 
+          color="#000" />
           <FiShoppingCart
-            className="bag-icon"
-            onClick={onClick}
+            onClick={handleBagIcon}
             size={28}
             color="#000"
           />

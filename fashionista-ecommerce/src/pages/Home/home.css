@@ -30,9 +30,9 @@
 
 .catalog-list-item {
     width: 100%;
-    max-width: 300px;
+    max-width: 240px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -90,7 +90,7 @@
 }
 
 .product-value {
-    color: #ccc;
+    color: red;
     text-decoration: line-through;
     margin-right: 20px;
 }

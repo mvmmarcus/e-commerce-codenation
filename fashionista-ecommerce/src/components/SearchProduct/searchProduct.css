@@ -1,0 +1,114 @@
+.search-modal-container {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  background: #f0f0f5;
+  width: 100%;
+  max-width: 280px;
+  min-height: 100%;
+  height: auto;
+  padding: 60px 20px;
+}
+
+.search-modal-title {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  background: #fff;
+  width: 100%;
+  max-width: 280px;
+  text-align: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #41414d;
+}
+
+.search-input {
+  position: relative;
+  border: none;
+  border-bottom: 1px solid #41414a;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+  font: 400 14px Roboto, sans-serif;
+}
+
+.clear-search {
+    position: absolute;
+    top: 15px;
+    right: 80px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.search-icon {
+  position: absolute;
+  left: -30px;
+  top: 0px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.product {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.search-modal-container figure {
+  width: 100%;
+  max-width: 80px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.search-product-img {
+  width: 100%;
+  height: auto;
+}
+
+.search-btn-add-item {
+  width: 80px;
+  font-size: 10px;
+  background: none;
+  color: green;
+  border: 1px solid #41414d;
+}
+
+.search-product-info {
+  width: 100%;
+  max-width: 120px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0 10px;
+}
+
+.search-product-name {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.search-product-value-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.search-normal-value {
+  color: #41414d;
+}
+
+.search-parcel-value {
+    font-size: 12px;
+    margin-top: 5px;
+    color: red;
+}

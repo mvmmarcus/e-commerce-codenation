@@ -6,12 +6,17 @@ import "./home.css";
 import vestido from "../../assets/vestido.jpg";
 import { Link } from "react-router-dom";
 import CartModal from "../../components/CartModal";
+import SearchProduct from "../../components/SearchProduct";
 
 export default function Home() {
-  const [show, setShow] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
-  const showCartModal = () => setShow(true);
-  const hideCartModal = () => setShow(false);
+  const showCartModal = () => setShowCart(true);
+  const hideCartModal = () => setShowCart(false);
+
+  const showSearchModal = () => setShowSearch(true);
+  const hideSearchModal = () => setShowSearch(false);
 
   const products = [
     {
@@ -61,9 +66,12 @@ export default function Home() {
   return (
     <>
       <div className="conteudo">
-        <Header onClick={showCartModal} />
-        {show && (
+        <Header handleBagIcon={showCartModal} handleSearchIcon={showSearchModal} />
+        {showCart && (
           <CartModal handleShow={showCartModal} handleClose={hideCartModal} />
+        )}
+        {showSearch && (
+          <SearchProduct handleShow={showSearchModal} handleClose={hideSearchModal} />
         )}
         <div className="container">
           <h1>Catálogo</h1>

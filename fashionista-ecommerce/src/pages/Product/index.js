@@ -3,28 +3,50 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import "./product.css";
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft } from "react-icons/fi";
 
 import vestido from "../../assets/vestido.jpg";
 import { Link } from "react-router-dom";
 import ImgModal from "../../components/ImgModal";
+import SearchProduct from "../../components/SearchProduct";
+import CartModal from "../../components/CartModal";
 
 export default function Home() {
-  const [show, setShow] = useState(false);
+  const [showImg, setShowImg] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
-  const showModal = () => setShow(true);
-  const hideModal = () => setShow(false);
+  const showIMGModal = () => setShowImg(true);
+  const hideimgModal = () => setShowImg(false);
+
+  const showCartModal = () => setShowCart(true);
+  const hideCartModal = () => setShowCart(false);
+
+  const showSearchModal = () => setShowSearch(true);
+  const hideSearchModal = () => setShowSearch(false);
 
   return (
     <>
       <div className="conteudo">
-        {show && (
-          <ImgModal img={vestido} handleShow={show} handleClose={hideModal} />
+        <Header
+          handleBagIcon={showCartModal}
+          handleSearchIcon={showSearchModal}
+        />
+        {showCart && (
+          <CartModal handleShow={showCartModal} handleClose={hideCartModal} />
         )}
-        <Header />
+        {showSearch && (
+          <SearchProduct
+            handleShow={showSearchModal}
+            handleClose={hideSearchModal}
+          />
+        )}
+        {showImg && (
+          <ImgModal img={vestido} handleShow={showImg} handleClose={hideimgModal} />
+        )}
         <div className="product-container">
           <figure>
-            <img onClick={showModal} id="myImage" src={vestido} alt="Vestido" />
+            <img onClick={showIMGModal} id="myImage" src={vestido} alt="Vestido" />
             <div id="myResult" className="img-zoom-result"></div>
           </figure>
           <section className="product-info">

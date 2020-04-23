@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import "./home.css";
-import vestido from "../../assets/vestido.jpg";
 import { Link } from "react-router-dom";
 import CartModal from "../../components/CartModal";
 import SearchProduct from "../../components/SearchProduct";
+import { fetchProducts } from "../../actions/products";
+import { useDispatch, useSelector } from "react-redux";
+import { productsSelectors } from "../../selectors/products";
+import { cartProductsSelectors } from "../../selectors/cartProducts";
+
+import imageNull from "../../assets/indisponivel.jpg";
 
 export default function Home() {
   const [showCart, setShowCart] = useState(false);
@@ -18,84 +23,73 @@ export default function Home() {
   const showSearchModal = () => setShowSearch(true);
   const hideSearchModal = () => setShowSearch(false);
 
-  const products = [
-    {
-      id: 1,
-      name: "Vestido Dourado",
-      value: 120.0,
-      promoValue: 100.0,
-      promoSealValue: "-12%",
-      imgUrl: vestido,
-    },
-    {
-      id: 2,
-      name: "Vestido Prata",
-      value: 120.0,
-      promoValue: 100.0,
-      promoSealValue: "-12%",
-      imgUrl: vestido,
-    },
-    {
-      id: 3,
-      name: "Vestido Rosa",
-      value: 120.0,
-      promoValue: 100.0,
-      promoSealValue: "-12%",
-      imgUrl: vestido,
-    },
-    {
-      id: 4,
-      name: "Vestido Azul",
-      value: 120.0,
-      promoValue: 100.0,
-      promoSealValue: "-12%",
-      imgUrl: vestido,
-    },
-    {
-      id: 5,
-      name: "Vestido Cinza",
-      value: 120.0,
-      promoValue: 100.0,
-      promoSealValue: "-12%",
-      imgUrl: vestido,
-    },
-  ];
+  const dispatch = useDispatch();
+  const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
+  const products = useSelector(productsSelectors.getProducts);
 
-  console.log(products);
-
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   return (
     <>
-      <div className="conteudo">
-        <Header handleBagIcon={showCartModal} handleSearchIcon={showSearchModal} />
+      <div className="content">
+        <Header
+          cartProductsCounter={cartProducts.length}
+          handleBagIcon={showCartModal}
+          handleSearchIcon={showSearchModal}
+        />
         {showCart && (
-          <CartModal handleShow={showCartModal} handleClose={hideCartModal} />
+          <CartModal
+            cartProducts={cartProducts}
+            handleShow={showCartModal}
+            handleClose={hideCartModal}
+          />
         )}
         {showSearch && (
-          <SearchProduct handleShow={showSearchModal} handleClose={hideSearchModal} />
+          <SearchProduct
+            handleShow={showSearchModal}
+            handleClose={hideSearchModal}
+          />
         )}
         <div className="container">
           <h1>Catálogo</h1>
-          <div className="catalog-container">
-            <span>22 items</span>
-            <ul className="catalog-list">
+          <div className="catalog__container">
+            <span className="catalog__counter" >{products.length} items</span>
+            <ul className="catalog__list">
               {products.map((item) => (
-                <li key={item.id} className="catalog-list-item">
-                  <Link to={`product/${item.id}`}>
-                    <figure className="product-poster">
-                      <img src={item.imgUrl} alt="Vestido" />
-                      <div className="product-promo-seal">
-                        <span className="product-promo-seal-value">
-                          {item.promoSealValue}
-                        </span>
+                <li key={item.id} className="catalog__list__item">
+                  <Link to={`products/${item.id}`}>
+                    <figure className="item__poster">
+                      {!item.image ? (
+                        <img className="home__item__img" src={imageNull} alt="Null" />
+                      ) : (
+                        <img className="home__item__img" src={item.image} alt="product" />
+                      )}
+                      <div className="item__seal__container">
+                        {item.discount_percentage && (
+                          <span className="seal__value">
+                            -{item.discount_percentage}
+                          </span>
+                        )}
                       </div>
                     </figure>
                   </Link>
-                  <div className="product-poster-info">
-                    <strong>{item.name}</strong>
-                    <span className="product-value">{item.value}</span>
-                    <span className="product-promo-value">
-                      {item.promoValue}
-                    </span>
+                  <div className="item__info__container">
+                    <strong className="item__name" >{item.name}</strong>
+                    {item.regular_price !== item.actual_price ? (
+                      <>
+                        <span className="item__value">
+                          {item.regular_price}
+                        </span>
+                        <span className="item__value item__value--promo">
+                          {item.actual_price}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="item__value item__value--promo">
+                        {item.regular_price}
+                      </span>
+                    )}
                   </div>
                 </li>
               ))}

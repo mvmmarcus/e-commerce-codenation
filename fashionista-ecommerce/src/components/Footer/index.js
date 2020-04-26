@@ -6,14 +6,12 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="footer__container">
+    <div className="footer">
       <>
-        <Link to="/">
-          Fashionista
-        </Link>
-        <div className="icons__container">
-          <FiInstagram size={28} color="#000" />
-          <FiFacebook size={28} color="#000" />
+        <Link className="link link--home" to="/">Fashionista</Link>
+        <div className="footer__icons">
+          <FiInstagram className="icon icon--insta" />
+          <FiFacebook className="icon icon--face" />
         </div>
       </>
     </div>

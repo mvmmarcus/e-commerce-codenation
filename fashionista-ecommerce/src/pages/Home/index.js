@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
 import "./home.css";
 import { Link } from "react-router-dom";
 import CartModal from "../../components/CartModal";
@@ -32,7 +31,7 @@ export default function Home() {
   }, [dispatch]);
   return (
     <>
-      <div className="content">
+      <div className="container">
         <Header
           cartProductsCounter={cartProducts.length}
           handleBagIcon={showCartModal}
@@ -51,53 +50,59 @@ export default function Home() {
             handleClose={hideSearchModal}
           />
         )}
-        <div className="container">
-          <h1>Catálogo</h1>
-          <div className="catalog__container">
-            <span className="catalog__counter" >{products.length} items</span>
-            <ul className="catalog__list">
-              {products.map((item) => (
-                <li key={item.id} className="catalog__list__item">
-                  <Link to={`products/${item.id}`}>
-                    <figure className="item__poster">
-                      {!item.image ? (
-                        <img className="home__item__img" src={imageNull} alt="Null" />
-                      ) : (
-                        <img className="home__item__img" src={item.image} alt="product" />
+        <div className="catalog">
+          <h1 className="catalog__title">Catálogo</h1>
+          <span className="catalog__counter">{products.length} items</span>
+          <ul className="catalog__list">
+            {products.map((item) => (
+              <li key={item.id} className="catalog__item">
+                <Link to={`products/${item.id}`}>
+                  <figure className="catalog__poster">
+                    {!item.image ? (
+                      <img
+                        className="catalog__img--null"
+                        src={imageNull}
+                        alt="Null"
+                      />
+                    ) : (
+                      <img
+                        className="catalog__img"
+                        src={item.image}
+                        alt="product"
+                      />
+                    )}
+                    <div className="catalog__seal">
+                      {item.discount_percentage && (
+                        <span>-{item.discount_percentage}</span>
                       )}
-                      <div className="item__seal__container">
-                        {item.discount_percentage && (
-                          <span className="seal__value">
-                            -{item.discount_percentage}
-                          </span>
-                        )}
-                      </div>
-                    </figure>
-                  </Link>
-                  <div className="item__info__container">
-                    <strong className="item__name" >{item.name}</strong>
+                    </div>
+                  </figure>
+                </Link>
+                <div className="catalog__description">
+                  <strong className="catalog__name">{item.name}</strong>
+                  <div className="catalog__pricing">
                     {item.regular_price !== item.actual_price ? (
                       <>
-                        <span className="item__value">
+                        <span className="catalog__price">
                           {item.regular_price}
                         </span>
-                        <span className="item__value item__value--promo">
+                        <span className="catalog__price catalog__price--promo">
                           {item.actual_price}
                         </span>
                       </>
                     ) : (
-                      <span className="item__value item__value--promo">
+                      <span className="catalog__price catalog__price--promo">
                         {item.regular_price}
                       </span>
                     )}
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   );
 }

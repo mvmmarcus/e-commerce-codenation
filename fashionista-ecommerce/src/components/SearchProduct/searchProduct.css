@@ -1,184 +1,128 @@
-.content-modal {
+.search-modal {
+  width: 100%;
+  max-width: 300px;
+  min-height: 100%;
   position: absolute;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
-  background: #f0f0f5;
-  width: 100%;
-  max-width: 280px;
-  min-height: 100%;
-  height: auto;
-  padding: 60px 20px;
-  text-align: center;
+  background: #fff;
+  color: #41414d;
+  padding: 50px 0 20px;
 }
 
-.search-modal-title {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: #fff;
+.search-modal__title {
   width: 100%;
   max-width: 300px;
-  text-align: center;
+  position: fixed;
+  top: 0;
+  display: flex;
+  color: #41414d;
+  justify-content: center;
+  font-weight: 500;
+  background: #f0f0f5;
   padding: 10px;
-  border-bottom: 1px solid #41414d;
+  border-bottom: 1px solid #ccc;
 }
 
-.modal-title svg {
+.search-modal__close-icon {
   position: absolute;
-  left: -30px;
-  top: 0px;
+  left: 0;
+  top: 0;
+  font-size: 30px;
+  padding: 5px;
   cursor: pointer;
-  color: #fff;
+  color: #41414d;
 }
 
-.search-input {
-  width: 100%;
+.search-modal__input {
+  width: 80%;
   position: relative;
   border: none;
+  background: #f0f0f5;
   border-bottom: 1px solid #41414a;
   padding: 5px;
   font: 400 14px Roboto, sans-serif;
 }
 
-.clear-search {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    color: #ccc;
-    cursor: pointer;
-}
-
-.search-icon {
+.search-modal__clear-icon {
   position: absolute;
-  left: -30px;
-  top: 0px;
+  top: 15px;
+  right: 15px;
+  color: #ccc;
   cursor: pointer;
-  color: #fff;
 }
 
-.product {
+.search-modal__not-found{
+  margin-top: 20px;
+}
+
+.search-product {
   display: flex;
   flex-direction: row;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  padding: 10px;
+  justify-content: space-evenly;
+  text-align: center;
   border-bottom: 1px solid #ccc;
 }
 
-.product figure{
-  cursor: pointer;
-}
-
-.is-empty-msg{
-  text-align: center;
-  color: #41414d;
-}
-
-.modal-container figure {
+.search-product__poster {
   width: 100%;
-  max-width: 80px;
   height: 100%;
-  padding: 0;
-  margin: 0;
+  max-width: 150px;
+  overflow: hidden;
 }
 
-.modal-product-img {
+.search-product__img {
   width: 100%;
   height: auto;
 }
 
-.search-modal-product-info {
+.search-product__description {
   width: 100%;
-  max-width: 120px;
   height: 100%;
   display: flex;
+  padding-top: 10px;
   flex-direction: column;
-  text-align: center;
   align-items: center;
-  
 }
 
-.modal-product-name {
+.search-product__name {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 
-.modal-product-selected-size {
-  font-size: 12px;
-  margin-bottom: 10px;
-}
-
-.modal-product-qty-container {
-  width: 100%;
-  max-width: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.modal-product-btn-more {
-  background: none;
-  border: 1px solid #41414d;
-  padding: 3px 5px;
-}
-
-.modal-product-qty-container {
-  width: 100%;
-  max-width: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.modal-product-qty-container svg {
-  cursor: pointer;
-}
-
-.modal-total-container {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background: #fff;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-  padding: 15px 0;
-  border-top: 1px solid #41414d;
-}
-
-.modal-product-value-container {
-  width: 150px;
+.search-product__pricing {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-evenly;
 }
 
-.modal-normal-value {
-  color: red;
+.search-product__parcel-price {
   font-size: 12px;
-  order: -1;
-  text-decoration: line-through;
+  margin-top: 5px;
+  color: red;
 }
 
-
-.search-modal-title {
-  position: absolute;
-  display: flex;
-  top: 0;
-  right: 0;
-  background: #fff;
-  width: 100%;
-  max-width: 280px;
-  text-align: center;
-  padding: 10px 20px;
-  border-bottom: 1px solid #41414d;
+.search-product__price {
+  color: #41414d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
-.search-parcel-value {
-    font-size: 12px;
-    margin-top: 5px;
-    color: red;
+@media(max-width: 450px){
+  .search-modal{
+    width: 100%;
+    max-width: none;
+  }
+
+  .search-modal__title{
+    width: 100%;
+    max-width: none;
+  }
 }

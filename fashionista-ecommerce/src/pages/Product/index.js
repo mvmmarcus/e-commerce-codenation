@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 
 import "./product.css";
 import { FiArrowLeft } from "react-icons/fi";
@@ -51,7 +50,7 @@ export default function Product(props) {
   };
   return (
     <>
-      <div className="product__container">
+      <div className="container">
         <Header
           cartProductsCounter={cartProducts.length}
           handleBagIcon={showCartModal}
@@ -91,30 +90,29 @@ export default function Product(props) {
         {products.map((item) => {
           if (item.id === id) {
             return (
-              <div key={item.id} className="product__content">
+              <div key={item.id} className="product">
                 <figure className="product__poster">
                   {!item.image ? (
-                    <img className="poster__img" src={imageNull} alt="Null" />
+                    <img className="product__img" src={imageNull} alt="Null" />
                   ) : (
                     <img
-                      className="poster__img"
+                      className="product__img product__img--null"
                       onClick={showIMGModal}
                       id="myImage"
                       src={item.image}
                       alt="Product"
                     />
                   )}
-                  <div id="myResult" className="img-zoom-result"></div>
                 </figure>
-                <section className="product__info__container">
+                <section className="product__description">
                   <strong className="product__name">{item.name}</strong>
-                  <span className="product__value">
+                  <span className="product__price">
                     {item.actual_price}
                   </span>
-                  <span className="product__value product__value--parcel">
-                    {item.installments}
+                  <span className="product__price product__price--parcel">
+                    Em até {item.installments}
                   </span>
-                  <div className="product__size__container">
+                  <div className="product__size">
                     <select
                       value={selectedSize}
                       onChange={(e) => dispatch(onSelectSize(e.target.value))}
@@ -135,13 +133,13 @@ export default function Product(props) {
                     </select>
                   </div>
                   <button
-                    className="add__bag__btn"
+                    className="btn btn--bag"
                     onClick={() => handleAddProductToCart(item, selectedSize)}
                   >
                     Adicionar ao carrinho
                   </button>
-                  <Link className="back__link" to="/">
-                    <FiArrowLeft size={14} color="#000" />
+                  <Link className="link link--back" to="/">
+                    <FiArrowLeft className="icon icon--back" />
                     Voltar para home
                   </Link>
                 </section>
@@ -151,7 +149,7 @@ export default function Product(props) {
           return null;
         })}
       </div>
-      <Footer />
+      
     </>
   );
 }

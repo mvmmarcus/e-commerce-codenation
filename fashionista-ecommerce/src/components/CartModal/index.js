@@ -25,33 +25,38 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
   return (
     <>
       {handleShow && (
-        <div className="container-modal">
-          <div className="content-modal">
-            <div className="modal-title">
-              <FiX onClick={handleClose} size={24} />
-              <span>Carrinho ({cartProducts.length})</span>
-         
+        <div className="modal">
+          <div className="cart-modal">
+            <div className="cart-modal__title">
+              <FiX className="cart-modal__close-icon" onClick={handleClose} />
+              Carrinho ({cartProducts.length})
             </div>
-            
+
             {isEmpty && (
-              <span className="is-empty-msg">O carrinho está vazio!</span>
+              <span className="cart-modal__is-empty">O carrinho está vazio!</span>
             )}
             {cartProducts.map((item) => {
               return (
-                <div key={item.id} className="product">
-                  <figure>
+                <div key={item.id} className="cart-product">
+                  <figure className="cart-product__poster">
                     {!item.product.image ? (
-                      <Link onClick={handleClose} to={`/products/${item.product.id}`}>
+                      <Link
+                        onClick={handleClose}
+                        to={`/products/${item.product.id}`}
+                      >
                         <img
-                          className="modal-product-img"
+                          className="cart-product__img cart-product__img--null"
                           src={imageNull}
                           alt="Null"
                         />
                       </Link>
                     ) : (
-                      <Link onClick={handleClose} to={`/products/${item.product.id}`}>
+                      <Link
+                        onClick={handleClose}
+                        to={`/products/${item.product.id}`}
+                      >
                         <img
-                          className="modal-product-img"
+                          className="cart-product__img"
                           src={item.product.image}
                           alt="imgModal"
                         />
@@ -61,53 +66,51 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
                       onClick={() =>
                         dispatch(actions.removeItemFromCart(item.id))
                       }
-                      className="modal-btn"
+                      className="btn btn--remove"
                     >
-                      Remover item
+                      Remover
                     </button>
                   </figure>
 
-                  <section className="modal-product-info">
-                    <span className="modal-product-name">
+                  <section className="cart-product__description">
+                    <span className="cart-product__name">
                       {item.product.name}
                     </span>
-                    <span className="modal-product-selected-size">
+                    <span className="cart-product__selected-size">
                       Tam: {item.selectedSize}
                     </span>
-                    <div className="modal-product-qty-container">
+                    <div className="cart-product__qty">
                       <FiMinusCircle
+                        className="icon icon--more"
                         onClick={() => handleDecrementCount(item.id)}
-                        size={20}
                       />
-                      <span className="modal-product-qty">{item.qty}</span>
+                      <span className="cart-product__counter">{item.qty}</span>
                       <FiPlusCircle
+                        className="icon icon--less"
                         onClick={() => handleIncrementCount(item.id)}
-                        size={20}
                       />
                     </div>
-                    <div className="modal-product-value-container">
-                      {item.product.regular_price !==
-                      item.product.actual_price ? (
-                        <>
-                          <span className="modal-promo-value">
-                            {item.product.actual_price}
-                          </span>
-                          <span className="modal-normal-value">
-                            {item.product.regular_price}
-                          </span>
-                        </>
-                      ) : (
-                        <span className="modal-promo-value">
+                    {item.product.regular_price !==
+                    item.product.actual_price ? (
+                      <>
+                        <span className="cart-product__price">
+                          {item.product.regular_price}
+                        </span>
+                        <span className="cart-product__price cart-product__price--promo">
                           {item.product.actual_price}
                         </span>
-                      )}
-                    </div>
+                      </>
+                    ) : (
+                      <span className="cart-product__price cart-product__price--promo">
+                        {item.product.actual_price}
+                      </span>
+                    )}
                   </section>
                 </div>
               );
             })}
-            <div className="modal-total-container">
-              <span className="modal-product-total-value">
+            <div className="cart-modal__subtotal">
+              <span className="cart-modal__subtotal-price">
                 Subtotal: R$ {total.toFixed(2)}
               </span>
             </div>

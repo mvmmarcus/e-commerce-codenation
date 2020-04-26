@@ -1,4 +1,4 @@
-.img-modal-container {
+.img-modal {
   display: block;
   position: fixed;
   z-index: 2;
@@ -11,50 +11,25 @@
   overflow: auto;
 }
 
-.img-modal-container img {
-  margin: auto;
-  display: block;
+.img-modal__poster{
   width: 100%;
-  max-width: 350px;
+  max-width: 500px;
+  height: 100%;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.btn--close{
+  position: absolute;
+  font-size: 24px;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+}
+
+.img-modal__img {
+  width: 100%;
   height: auto;
 }
 
-.btn-close-modal {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  color: #fff;
-  font-size: 30px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-@media (max-width: 1024px) {
-    .img-modal-container img {
-      margin: auto;
-      display: block;
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-    }
-  }
-
-@media (max-width: 425px) {
-  .img-modal-container img {
-    margin: auto;
-    display: block;
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-  }
-}
-
-@media (max-width: 320px) {
-    .img-modal-container img {
-      margin: auto;
-      display: block;
-      width: 100%;
-      max-width: 250px;
-      height: auto;
-    }
-  }

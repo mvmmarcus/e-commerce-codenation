@@ -27,12 +27,12 @@ export default function SearchProduct({ handleShow, handleClose }) {
   return (
     <>
       {handleShow && (
-        <div className="container-modal">
-          <div className="content-modal">
-            <div className="search-modal-title">
-              <FiX className="search-icon" onClick={handleClose} size={24} />
+        <div className="modal">
+          <div className="search-modal">
+            <div className="search-modal__title">
+              <FiX className="search-modal__close-icon" onClick={handleClose} />
               <input
-                className="search-input"
+                className="search-modal__input"
                 value={searchName}
                 onChange={(e) => onChange(e.target.value)}
                 type="text"
@@ -40,44 +40,44 @@ export default function SearchProduct({ handleShow, handleClose }) {
               />
               <FiX
                 onClick={() => dispatch(onInputChange(""))}
-                className="clear-search"
+                className="search-modal__clear-icon"
                 size={18}
               />
             </div>
             {filteredItems.length === 0 && (
-              <span>Nenhum resultado encontrado !</span>
+              <span className="search-modal__not-found">Nenhum resultado encontrado !</span>
             )}
             {filteredItems.map((item) => {
               return (
                 <React.Fragment key={item.id}>
-                  <div key={item.id} className="product">
-                    <figure>
+                  <div key={item.id} className="search-product">
+                    <figure className="search-product__poster">
                       {!item.image ? (
                         <Link onClick={handleClose} to={`/products/${item.id}`}>
                           <img
-                            className="modal-product-img"
+                            className="search-product__img search-product__img--null"
                             src={imageNull}
-                            alt="Null"
+                            alt="img null"
                           />
                         </Link>
                       ) : (
                         <Link onClick={handleClose} to={`/products/${item.id}`}>
                           <img
-                            className="modal-product-img"
+                            className="search-product__img"
                             src={item.image}
-                            alt="imgModal"
+                            alt="img"
                           />
                         </Link>
                       )}
                     </figure>
-                    <section className="search-modal-product-info">
-                      <span className="modal-product-name">{item.name}</span>
-                      <div className="modal-product-value-container">
-                        <span className="modal-promo-value">
-                          {item.actual_price}
+                    <section className="search-product__description">
+                      <span className="search-product__name">{item.name}</span>
+                      <div className="search-product__pricing">
+                        <span className="search-product__parcel-price">
+                          Em até {item.installments}
                         </span>
-                        <span className="search-parcel-value">
-                          {item.installments}
+                        <span className="search-product__price">
+                          {item.actual_price}
                         </span>
                       </div>
                     </section>

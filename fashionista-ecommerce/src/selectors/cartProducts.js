@@ -19,6 +19,13 @@ const calculateTotal = createSelector(
   }
 );
 
+const calculateCounter = createSelector(
+  (state) => state.cartProductsReducers.cartProducts,
+  (cartProducts) => {
+    return cartProducts.reduce((counter, item) => counter + item.qty, 0);
+  }
+);
+
 const cartProductsSelectors = {
   getCartProducts: (state) => state.cartProductsReducers.cartProducts,
 
@@ -26,6 +33,8 @@ const cartProductsSelectors = {
 
   cartProductsIsEmpty: (state) =>
     state.cartProductsReducers.cartProducts.length === 0 ? true : false,
+
+  getCartCounter: (state) => calculateCounter(state),
 };
 
 export { cartProductsSelectors };

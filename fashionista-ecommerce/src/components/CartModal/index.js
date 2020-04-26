@@ -13,6 +13,7 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
   const dispatch = useDispatch();
   const total = useSelector(cartProductsSelectors.total);
   const isEmpty = useSelector(cartProductsSelectors.cartProductsIsEmpty);
+  const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
 
   const handleIncrementCount = (id) => {
     dispatch(actions.incrementCount(id));
@@ -29,11 +30,13 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
           <div className="cart-modal">
             <div className="cart-modal__title">
               <FiX className="cart-modal__close-icon" onClick={handleClose} />
-              Carrinho ({cartProducts.length})
+              Carrinho ({cartCounter})
             </div>
 
             {isEmpty && (
-              <span className="cart-modal__is-empty">O carrinho está vazio!</span>
+              <span className="cart-modal__is-empty">
+                O carrinho está vazio!
+              </span>
             )}
             {cartProducts.map((item) => {
               return (

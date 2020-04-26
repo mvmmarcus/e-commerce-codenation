@@ -34,6 +34,7 @@ export default function Product(props) {
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
   let selectedSize = useSelector(productsSelectors.getSelectedSize);
+  const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,11 +49,21 @@ export default function Product(props) {
     }
     dispatch(actions.addItemToCart(product, size));
   };
+
+  const handleSelectSize = (size) => {
+    dispatch(onSelectSize(size));
+    let sizes = document.querySelectorAll(".btn-sizes");
+    for (let value of sizes) {
+      if (value.classList.contains("btn-sizes--selected"))
+        value.classList.remove("btn-sizes--selected");
+      if (value.innerHTML === size) value.classList.add("btn-sizes--selected");
+    }
+  };
   return (
     <>
       <div className="container">
         <Header
-          cartProductsCounter={cartProducts.length}
+          cartProductsCounter={cartCounter}
           handleBagIcon={showCartModal}
           handleSearchIcon={showSearchModal}
         />
@@ -106,31 +117,24 @@ export default function Product(props) {
                 </figure>
                 <section className="product__description">
                   <strong className="product__name">{item.name}</strong>
-                  <span className="product__price">
-                    {item.actual_price}
-                  </span>
+                  <span className="product__price">{item.actual_price}</span>
                   <span className="product__price product__price--parcel">
                     Em até {item.installments}
                   </span>
                   <div className="product__size">
-                    <select
-                      value={selectedSize}
-                      onChange={(e) => dispatch(onSelectSize(e.target.value))}
-                      name="size"
-                      id="size"
-                    >
-                      <option value="">Escolha o tamanho</option>
-                      {item.sizes.map((size) => {
-                        if (size.available) {
-                          return (
-                            <React.Fragment key={size.sku}>
-                              <option value={size.size}>{size.size}</option>
-                            </React.Fragment>
-                          );
-                        }
-                        return null;
-                      })}
-                    </select>
+                    {item.sizes.map((size) => {
+                      return (
+                        size.available && (
+                          <button
+                            key={size.sku}
+                            onClick={() => handleSelectSize(size.size)}
+                            className="btn-sizes btn-sizes--normal"
+                          >
+                            {size.size}
+                          </button>
+                        )
+                      );
+                    })}
                   </div>
                   <button
                     className="btn btn--bag"
@@ -149,7 +153,38 @@ export default function Product(props) {
           return null;
         })}
       </div>
-      
     </>
   );
 }
+
+/**
+ * <select
+                      value={selectedSize}
+                      onChange={(e) => dispatch(onSelectSize(e.target.value))}
+                      name="size"
+                      id="size"
+                    >
+                      <option value="">Escolha o tamanho</option>
+                      {item.sizes.map((size) => {
+                        if (size.available) {
+                          return (
+                            <React.Fragment key={size.sku}>
+                              <option value={size.size}>{size.size}</option>
+                            </React.Fragment>
+                          );
+                        }
+                        return null;
+                      })}
+                    </select>
+
+                    ##CSS:
+                    .product__size {
+  width: 100%;
+  max-width: 200px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+ */

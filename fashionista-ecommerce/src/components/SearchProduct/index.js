@@ -9,10 +9,28 @@ import { productsSelectors } from "../../selectors/products";
 import { filterProducts, onInputChange } from "../../actions/products";
 import { Link } from "react-router-dom";
 
-export default function SearchProduct({ handleShow, handleClose }) {
+export default function SearchProduct({ id="modal", handleShow, handleClose }) {
   const products = useSelector(productsSelectors.getProducts);
   const filteredItems = useSelector(productsSelectors.getFilteredItems);
   let searchName = useSelector(productsSelectors.getSearchNameValue);
+
+  useEffect(() => {
+    const searchModal = document.getElementById("search");
+    searchModal.classList.add("open-modal");
+  }, [handleShow]);
+
+  const handleOutsideClick = (e) => {
+    if (e.target.id === id) handleClose();
+  };
+
+  const handleCloseSearch = () => {
+    const searchModal = document.getElementById("search");
+    searchModal.classList.add("close-modal");
+    document.getElementById("modal").style.background = "none";
+    setTimeout(() => {
+      handleClose();
+    }, 200);
+  };
 
   const dispatch = useDispatch();
 
@@ -27,10 +45,10 @@ export default function SearchProduct({ handleShow, handleClose }) {
   return (
     <>
       {handleShow && (
-        <div className="modal">
-          <div className="search-modal">
+        <div id={id} className="modal" onClick={handleOutsideClick} >
+          <div id="search" className="search-modal">
             <div className="search-modal__title">
-              <FiX className="search-modal__close-icon" onClick={handleClose} />
+              <FiX className="search-modal__close-icon" onClick={handleCloseSearch} />
               <input
                 className="search-modal__input"
                 value={searchName}
@@ -45,7 +63,9 @@ export default function SearchProduct({ handleShow, handleClose }) {
               />
             </div>
             {filteredItems.length === 0 && (
-              <span className="search-modal__not-found">Nenhum resultado encontrado !</span>
+              <span className="search-modal__not-found">
+                Nenhum resultado encontrado !
+              </span>
             )}
             {filteredItems.map((item) => {
               return (

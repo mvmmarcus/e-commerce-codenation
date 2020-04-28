@@ -16,38 +16,34 @@ export default function Home() {
   const [showCart, setShowCart] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
 
-  const showCartModal = () => setShowCart(true);
-  const hideCartModal = () => setShowCart(false);
-
-  const showSearchModal = () => setShowSearch(true);
-  const hideSearchModal = () => setShowSearch(false);
-
   const dispatch = useDispatch();
+  const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+  
   return (
     <>
       <div className="container">
         <Header
-          cartProductsCounter={cartProducts.length}
-          handleBagIcon={showCartModal}
-          handleSearchIcon={showSearchModal}
+          cartProductsCounter={cartCounter}
+          handleBagIcon={() => setShowCart(true)}
+          handleSearchIcon={() => setShowSearch(true)}
         />
         {showCart && (
           <CartModal
             cartProducts={cartProducts}
-            handleShow={showCartModal}
-            handleClose={hideCartModal}
+            handleShow={() => setShowCart(true)}
+            handleClose={() => setShowCart(false)}
           />
         )}
         {showSearch && (
           <SearchProduct
-            handleShow={showSearchModal}
-            handleClose={hideSearchModal}
+            handleShow={() => setShowSearch(true)}
+            handleClose={() => setShowSearch(false)}
           />
         )}
         <div className="catalog">

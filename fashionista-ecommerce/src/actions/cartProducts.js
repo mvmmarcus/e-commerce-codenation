@@ -1,13 +1,36 @@
 import { actionsTypes } from "../constants/cartProducts";
 
+const verificaId = (id, cartProducts) => {
+  let validIid = 0;
+  let lastPosition = cartProducts[cartProducts.length - 1];
+  cartProducts.map((item) => {
+    if (item.id === id) {
+      validIid = lastPosition.id + 1;
+    }
+    return item;
+  });
+  return validIid;
+};
+
+export const addItemToCart = (product, size) => {
+  return (dispatch, getState) => {
+    const { cartProducts } = getState().cartProductsReducers;
+    let validId = 0;
+    cartProducts.map((item) => {
+      return (validId = verificaId(item.id, cartProducts));
+    });
+    dispatch({
+      type: actionsTypes.ADD_TO_CART,
+      payload: {
+        id: validId,
+        product: product,
+        size: size,
+      },
+    });
+  };
+};
+
 const actions = {
-  addItemToCart: (product, size) => ({
-    type: actionsTypes.ADD_TO_CART,
-    payload: {
-      product: product,
-      size: size,
-    },
-  }),
   incrementCount: (id) => ({
     type: actionsTypes.INCREMENT_COUNT_CART_ITEM,
     payload: {

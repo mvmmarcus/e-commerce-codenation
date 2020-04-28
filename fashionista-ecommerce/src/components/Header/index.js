@@ -11,7 +11,6 @@ export default function Header({
   handleSearchIcon,
   cartProductsCounter,
 }) {
-  //const products = useSelector(productsSelectors.getProducts);
 
   return (
     <div className="header">

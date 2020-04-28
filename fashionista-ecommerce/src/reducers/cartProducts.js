@@ -8,7 +8,7 @@ const cartItem = (state, action) => {
   switch (action.type) {
     case actionsTypes.ADD_TO_CART:
       return {
-        id: state.cartProducts.length + 1,
+        id: action.payload.id,
         product: action.payload.product,
         selectedSize: action.payload.size,
         qty: 1,
@@ -40,9 +40,9 @@ const cartProductsReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionsTypes.ADD_TO_CART:
       let index = state.cartProducts.findIndex(
-        (val) =>
-          val.product.name === action.payload.product.name &&
-          val.selectedSize === action.payload.size
+        (item) =>
+          item.product.name === action.payload.product.name &&
+          item.selectedSize === action.payload.size
       );
       if (index >= 0) {
         return {
@@ -96,4 +96,3 @@ return {
         qty: 1,
       };
 */
-

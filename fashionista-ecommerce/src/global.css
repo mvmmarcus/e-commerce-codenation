@@ -40,6 +40,15 @@ body {
   position: fixed;
   display: flex;
   justify-content: flex-end;
+  overflow-x: hidden;
+}
+
+.open-modal {
+  transform: translateX(0px);
+}
+
+.close-modal {
+  transform: translateX(310px);
 }
 
 button {
@@ -47,6 +56,6 @@ button {
 }
 
 button:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./cartModal.css";
 import imageNull from "../../assets/indisponivel.jpg";
@@ -9,11 +9,25 @@ import { actions } from "../../actions/cartProducts";
 import { Link } from "react-router-dom";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
-export default function CartModal({ cartProducts, handleShow, handleClose }) {
+export default function CartModal({
+  id = "modal",
+  cartProducts,
+  handleShow,
+  handleClose,
+}) {
   const dispatch = useDispatch();
   const total = useSelector(cartProductsSelectors.total);
   const isEmpty = useSelector(cartProductsSelectors.cartProductsIsEmpty);
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
+
+  useEffect(() => {
+    const modal = document.getElementById("cart");
+    modal.classList.add("open-modal");
+  }, [handleShow]);
+
+  const handleOutsideClick = (e) => {
+    if (e.target.id === id) handleClose();
+  };
 
   const handleIncrementCount = (id) => {
     dispatch(actions.incrementCount(id));
@@ -23,13 +37,25 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
     dispatch(actions.decrementCount(id));
   };
 
+  const handleCloseCart = () => {
+    const cartModal = document.getElementById("cart");
+    cartModal.classList.add("close-modal");
+    document.getElementById("modal").style.background = "none";
+    setTimeout(() => {
+      handleClose();
+    }, 200);
+  };
+
   return (
     <>
       {handleShow && (
-        <div className="modal">
-          <div className="cart-modal">
+        <div id={id} className="modal" onClick={handleOutsideClick}>
+          <div id="cart" className="cart-modal">
             <div className="cart-modal__title">
-              <FiX className="cart-modal__close-icon" onClick={handleClose} />
+              <FiX
+                className="cart-modal__close-icon"
+                onClick={handleCloseCart}
+              />
               Carrinho ({cartCounter})
             </div>
 
@@ -39,7 +65,9 @@ export default function CartModal({ cartProducts, handleShow, handleClose }) {
               </span>
             )}
             {cartProducts.map((item) => {
+              console.log(item)
               return (
+                
                 <div key={item.id} className="cart-product">
                   <figure className="cart-product__poster">
                     {!item.product.image ? (

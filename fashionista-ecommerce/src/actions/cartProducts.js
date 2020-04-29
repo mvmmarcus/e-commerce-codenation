@@ -1,52 +1,55 @@
 import { actionsTypes } from "../constants/cartProducts";
 
-const verificaId = (id, cartProducts) => {
+const getValidId = (cartId, cartProducts) => {
   let validIid = 0;
   let lastPosition = cartProducts[cartProducts.length - 1];
   cartProducts.map((item) => {
-    if (item.id === id) {
-      validIid = lastPosition.id + 1;
-    }
-    return item;
+    return item.cartId === cartId ? (validIid = lastPosition.cartId + 1) : item;
   });
-  return validIid;
+  return { validIid };
 };
 
 export const addItemToCart = (product, size) => {
   return (dispatch, getState) => {
     const { cartProducts } = getState().cartProductsReducers;
-    let validId = 0;
+    let cartId = 0;
+    let isProductInCart = false;
     cartProducts.map((item) => {
-      return (validId = verificaId(item.id, cartProducts));
+      const { validIid } = getValidId(item.cartId, cartProducts);
+      cartId = validIid;
+      return item.product.id === product.id && item.selectedSize === size
+        ? (isProductInCart = true)
+        : item;
     });
     dispatch({
       type: actionsTypes.ADD_TO_CART,
       payload: {
-        id: validId,
+        cartId: cartId,
         product: product,
         size: size,
       },
+      isProductInCart: isProductInCart,
     });
   };
 };
 
 const actions = {
-  incrementCount: (id) => ({
+  incrementCount: (cartId) => ({
     type: actionsTypes.INCREMENT_COUNT_CART_ITEM,
     payload: {
-      id: id,
+      cartId: cartId,
     },
   }),
-  decrementCount: (id) => ({
+  decrementCount: (cartId) => ({
     type: actionsTypes.DECREMENT_COUNT_CART_ITEM,
     payload: {
-      id: id,
+      cartId: cartId,
     },
   }),
-  removeItemFromCart: (id) => ({
+  removeItemFromCart: (cartId) => ({
     type: actionsTypes.REMOVE_FROM_CART,
     payload: {
-      id: id,
+      cartId: cartId,
     },
   }),
 };

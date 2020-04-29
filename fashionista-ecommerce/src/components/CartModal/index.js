@@ -29,12 +29,12 @@ export default function CartModal({
     if (e.target.id === id) handleClose();
   };
 
-  const handleIncrementCount = (id) => {
-    dispatch(actions.incrementCount(id));
+  const handleIncrementCount = (cartId) => {
+    dispatch(actions.incrementCount(cartId));
   };
 
-  const handleDecrementCount = (id) => {
-    dispatch(actions.decrementCount(id));
+  const handleDecrementCount = (cartId) => {
+    dispatch(actions.decrementCount(cartId));
   };
 
   const handleCloseCart = () => {
@@ -65,10 +65,8 @@ export default function CartModal({
               </span>
             )}
             {cartProducts.map((item) => {
-              console.log(item)
               return (
-                
-                <div key={item.id} className="cart-product">
+                <div key={item.cartId} className="cart-product">
                   <figure className="cart-product__poster">
                     {!item.product.image ? (
                       <Link
@@ -95,7 +93,7 @@ export default function CartModal({
                     )}
                     <button
                       onClick={() =>
-                        dispatch(actions.removeItemFromCart(item.id))
+                        dispatch(actions.removeItemFromCart(item.cartId))
                       }
                       className="btn btn--remove"
                     >
@@ -113,12 +111,12 @@ export default function CartModal({
                     <div className="cart-product__qty">
                       <FiMinusCircle
                         className="icon icon--more"
-                        onClick={() => handleDecrementCount(item.id)}
+                        onClick={() => handleDecrementCount(item.cartId)}
                       />
                       <span className="cart-product__counter">{item.qty}</span>
                       <FiPlusCircle
                         className="icon icon--less"
-                        onClick={() => handleIncrementCount(item.id)}
+                        onClick={() => handleIncrementCount(item.cartId)}
                       />
                     </div>
                     {item.product.regular_price !==

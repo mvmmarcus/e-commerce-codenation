@@ -70,7 +70,7 @@ export default function SearchProduct({ id="modal", handleShow, handleClose }) {
             {filteredItems.map((item) => {
               return (
                 <React.Fragment key={item.id}>
-                  <div key={item.id} className="search-product">
+                  <div className="search-product">
                     <figure className="search-product__poster">
                       {!item.image ? (
                         <Link onClick={handleClose} to={`/products/${item.id}`}>

@@ -1,34 +1,28 @@
 import { actionsTypes } from "../constants/cartProducts";
 
-const getValidId = (cartId, cartProducts) => {
-  let validIid = 0;
-  let lastPosition = cartProducts[cartProducts.length - 1];
-  cartProducts.map((item) => {
-    return item.cartId === cartId ? (validIid = lastPosition.cartId + 1) : item;
-  });
-  return { validIid };
-};
-
 export const addItemToCart = (product, size) => {
   return (dispatch, getState) => {
     const { cartProducts } = getState().cartProductsReducers;
-    let cartId = 0;
-    let isProductInCart = false;
-    cartProducts.map((item) => {
-      const { validIid } = getValidId(item.cartId, cartProducts);
-      cartId = validIid;
-      return item.product.id === product.id && item.selectedSize === size
-        ? (isProductInCart = true)
-        : item;
-    });
+    const cartId =
+      cartProducts.length > 0
+        ? cartProducts[cartProducts.length - 1].cartId + 1
+        : 0;
+
+    const cartIndex = cartProducts.findIndex(
+      (item) => item.product.name === product.name && item.selectedSize === size
+    );
+    let id = 0;
+    if (cartIndex >= 0) id = cartProducts[cartIndex].cartId;
+
     dispatch({
       type: actionsTypes.ADD_TO_CART,
       payload: {
         cartId: cartId,
         product: product,
-        size: size,
+        selectedSize: size,
       },
-      isProductInCart: isProductInCart,
+      id: id,
+      cartIndex: cartIndex,
     });
   };
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 
 import "./product.css";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiX } from "react-icons/fi";
 
 import { Link } from "react-router-dom";
 import ImgModal from "../../components/ImgModal";
@@ -19,6 +19,8 @@ export default function Product(props) {
   const [showImg, setShowImg] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [showAddCartAlert, setShowAddCartAlert] = useState(false);
+  const [showNoSizeSelectedAlert, setShowNoSizeSelectedAlert] = useState(false);
 
   let [id, setId] = useState(Number);
 
@@ -36,12 +38,15 @@ export default function Product(props) {
 
   const handleAddProductToCart = (product, size) => {
     if (size === "") {
-      return alert("Selecione um tamanho válido !");
+      return setShowNoSizeSelectedAlert(true);
     }
     dispatch(addItemToCart(product, size));
+    setShowAddCartAlert(true);
   };
 
   const handleSelectSize = (size) => {
+    setShowAddCartAlert(false);
+    setShowNoSizeSelectedAlert(false);
     dispatch(onSelectSize(size));
     let sizes = document.querySelectorAll(".btn-sizes");
     for (let value of sizes) {
@@ -127,6 +132,24 @@ export default function Product(props) {
                       );
                     })}
                   </div>
+                  {showAddCartAlert && (
+                    <div className="alert alert--sucess">
+                      <FiX
+                        className="icon icon--close-alert"
+                        onClick={() => setShowAddCartAlert(false)}
+                      />
+                      Produto adicionado !
+                    </div>
+                  )}
+                  {showNoSizeSelectedAlert && (
+                    <div className="alert alert--danger">
+                      <FiX
+                        className="icon icon--close-alert"
+                        onClick={() => setShowNoSizeSelectedAlert(false)}
+                      />
+                      Selecione um tamanho !
+                    </div>
+                  )}
                   <button
                     className="btn btn--bag"
                     onClick={() => handleAddProductToCart(item, selectedSize)}

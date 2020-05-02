@@ -79,6 +79,34 @@
   opacity: 0.8;
 }
 
+.alert {
+  width: 100%;
+  max-width: 200px;
+  position: relative;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px;
+  text-align: center;
+}
+
+.alert--sucess {
+  background: rgb(204, 226, 204);
+  color: green;
+}
+
+.alert--danger {
+  background: rgb(235, 189, 189);
+  color: red;
+}
+
+.icon--close-alert {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 25px;
+}
+
 .btn--bag {
   background: #039703;
   margin-top: 20px;

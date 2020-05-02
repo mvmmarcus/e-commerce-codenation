@@ -7,12 +7,21 @@ const INITIAL_STATE = {
 const cartItem = (state, action) => {
   switch (action.type) {
     case actionsTypes.ADD_TO_CART:
-      return {
-        cartId: action.payload.cartId,
-        product: action.payload.product,
-        selectedSize: action.payload.size,
-        qty: 1,
-      };
+      if (action.cartIndex === -1) {
+        return {
+          cartId: action.payload.cartId,
+          product: action.payload.product,
+          selectedSize: action.payload.selectedSize,
+          qty: 1,
+        };
+      }
+      if (action.id === state.cartId) {
+        return {
+          ...state,
+          qty: state.qty + 1,
+        };
+      }
+      return state;
     case actionsTypes.REMOVE_FROM_CART:
       return state.cartId !== action.payload.cartId;
     case actionsTypes.INCREMENT_COUNT_CART_ITEM:
@@ -39,24 +48,13 @@ const cartItem = (state, action) => {
 const cartProductsReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionsTypes.ADD_TO_CART:
-      if (action.isProductInCart) {
+      if (action.cartIndex === -1) {
         return {
-          cartProducts: state.cartProducts.map((item) => {
-            if (
-              item.product.name === action.payload.product.name &&
-              item.selectedSize === action.payload.size
-            ) {
-              return {
-                ...item,
-                qty: item.qty + 1,
-              };
-            }
-            return item;
-          }),
+          cartProducts: [...state.cartProducts, cartItem(state, action)],
         };
       }
       return {
-        cartProducts: [...state.cartProducts, cartItem(state, action)],
+        cartProducts: state.cartProducts.map((item) => cartItem(item, action)),
       };
     case actionsTypes.REMOVE_FROM_CART:
       return {
@@ -83,11 +81,3 @@ const cartProductsReducers = (state = INITIAL_STATE, action) => {
 
 export { cartProductsReducers };
 
-/*
-Modificar a forma como o estado é exibido:
-return {
-        ...action.payload,
-        id: action.id,
-        qty: 1,
-      };
-*/

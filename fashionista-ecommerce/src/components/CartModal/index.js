@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./cartModal.css";
 import imageNull from "../../assets/indisponivel.jpg";
@@ -6,13 +6,14 @@ import { FiX, FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../actions/cartProducts";
+import { modalsActions } from "../../actions/modals";
 import { Link } from "react-router-dom";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
 export default function CartModal({
   id = "modal",
   cartProducts,
-  handleShow,
+  showCart,
   handleClose,
 }) {
   const dispatch = useDispatch();
@@ -20,13 +21,8 @@ export default function CartModal({
   const isEmpty = useSelector(cartProductsSelectors.cartProductsIsEmpty);
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
 
-  useEffect(() => {
-    const modal = document.getElementById("cart");
-    modal.classList.add("open-modal");
-  }, [handleShow]);
-
   const handleOutsideClick = (e) => {
-    if (e.target.id === id) handleClose();
+    if (e.target.id === id) dispatch(modalsActions.handleCloseCart());
   };
 
   const handleIncrementCount = (cartId) => {
@@ -37,24 +33,15 @@ export default function CartModal({
     dispatch(actions.decrementCount(cartId));
   };
 
-  const handleCloseCart = () => {
-    const cartModal = document.getElementById("cart");
-    cartModal.classList.add("close-modal");
-    document.getElementById("modal").style.background = "none";
-    setTimeout(() => {
-      handleClose();
-    }, 200);
-  };
-
   return (
     <>
-      {handleShow && (
+      {showCart && (
         <div id={id} className="modal" onClick={handleOutsideClick}>
           <div id="cart" className="cart-modal">
             <div className="cart-modal__title">
               <FiX
                 className="cart-modal__close-icon"
-                onClick={handleCloseCart}
+                onClick={() => dispatch(modalsActions.handleCloseCart())}
               />
               Carrinho ({cartCounter})
             </div>
@@ -70,7 +57,9 @@ export default function CartModal({
                   <figure className="cart-product__poster">
                     {!item.product.image ? (
                       <Link
-                        onClick={handleClose}
+                        onClick={() =>
+                          dispatch(modalsActions.handleCloseCart())
+                        }
                         to={`/products/${item.product.id}`}
                       >
                         <img
@@ -81,7 +70,9 @@ export default function CartModal({
                       </Link>
                     ) : (
                       <Link
-                        onClick={handleClose}
+                        onClick={() =>
+                          dispatch(modalsActions.handleCloseCart())
+                        }
                         to={`/products/${item.product.id}`}
                       >
                         <img

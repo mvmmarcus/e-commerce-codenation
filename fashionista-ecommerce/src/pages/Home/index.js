@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./home.css";
@@ -11,40 +11,29 @@ import { productsSelectors } from "../../selectors/products";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
 import imageNull from "../../assets/indisponivel.jpg";
+import { modalsSelectors } from "../../selectors/modals";
 
 export default function Home() {
-  const [showCart, setShowCart] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-
   const dispatch = useDispatch();
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
+  const showCart = useSelector(modalsSelectors.getCartModalState);
+  const showSearch = useSelector(modalsSelectors.getSearchModalState);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  
+
   return (
     <>
       <div className="container">
-        <Header
-          cartProductsCounter={cartCounter}
-          handleBagIcon={() => setShowCart(true)}
-          handleSearchIcon={() => setShowSearch(true)}
-        />
+        <Header cartProductsCounter={cartCounter} />
         {showCart && (
-          <CartModal
-            cartProducts={cartProducts}
-            handleShow={() => setShowCart(true)}
-            handleClose={() => setShowCart(false)}
-          />
+          <CartModal cartProducts={cartProducts} showCart={showCart} />
         )}
         {showSearch && (
-          <SearchProduct
-            handleShow={() => setShowSearch(true)}
-            handleClose={() => setShowSearch(false)}
-          />
+          <SearchProduct products={products} showSearch={showSearch} />
         )}
         <div className="catalog">
           <h1 className="catalog__title">Catálogo</h1>

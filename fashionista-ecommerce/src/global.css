@@ -43,14 +43,6 @@ body {
   overflow-x: hidden;
 }
 
-.open-modal {
-  transform: translateX(0px);
-}
-
-.close-modal {
-  transform: translateX(310px);
-}
-
 button {
   cursor: pointer;
 }

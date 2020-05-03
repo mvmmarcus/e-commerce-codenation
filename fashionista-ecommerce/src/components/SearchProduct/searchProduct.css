@@ -10,9 +10,6 @@
   background: #fff;
   color: #41414d;
   padding: 50px 0 20px;
-
-  transform: translateX(310px);
-  transition: 0.3s ease-in-out;
 }
 
 .search-modal__title {
@@ -57,7 +54,7 @@
   cursor: pointer;
 }
 
-.search-modal__not-found{
+.search-modal__not-found {
   margin-top: 20px;
 }
 
@@ -118,13 +115,13 @@
   margin-top: 10px;
 }
 
-@media(max-width: 450px){
-  .search-modal{
+@media (max-width: 450px) {
+  .search-modal {
     width: 100%;
     max-width: none;
   }
 
-  .search-modal__title{
+  .search-modal__title {
     width: 100%;
     max-width: none;
   }

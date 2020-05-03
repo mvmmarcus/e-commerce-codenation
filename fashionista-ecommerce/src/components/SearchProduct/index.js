@@ -8,28 +8,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { productsSelectors } from "../../selectors/products";
 import { filterProducts, onInputChange } from "../../actions/products";
 import { Link } from "react-router-dom";
+import { modalsActions } from "../../actions/modals";
 
-export default function SearchProduct({ id="modal", handleShow, handleClose }) {
-  const products = useSelector(productsSelectors.getProducts);
+export default function SearchProduct({ id = "modal", showSearch, products }) {
   const filteredItems = useSelector(productsSelectors.getFilteredItems);
   let searchName = useSelector(productsSelectors.getSearchNameValue);
 
-  useEffect(() => {
-    const searchModal = document.getElementById("search");
-    searchModal.classList.add("open-modal");
-  }, [handleShow]);
-
   const handleOutsideClick = (e) => {
-    if (e.target.id === id) handleClose();
-  };
-
-  const handleCloseSearch = () => {
-    const searchModal = document.getElementById("search");
-    searchModal.classList.add("close-modal");
-    document.getElementById("modal").style.background = "none";
-    setTimeout(() => {
-      handleClose();
-    }, 200);
+    if (e.target.id === id) dispatch(modalsActions.handleCloseSearch());
   };
 
   const dispatch = useDispatch();
@@ -44,11 +30,14 @@ export default function SearchProduct({ id="modal", handleShow, handleClose }) {
 
   return (
     <>
-      {handleShow && (
-        <div id={id} className="modal" onClick={handleOutsideClick} >
+      {showSearch && (
+        <div id={id} className="modal" onClick={handleOutsideClick}>
           <div id="search" className="search-modal">
             <div className="search-modal__title">
-              <FiX className="search-modal__close-icon" onClick={handleCloseSearch} />
+              <FiX
+                className="search-modal__close-icon"
+                onClick={() => dispatch(modalsActions.handleCloseSearch())}
+              />
               <input
                 className="search-modal__input"
                 value={searchName}
@@ -71,9 +60,14 @@ export default function SearchProduct({ id="modal", handleShow, handleClose }) {
               return (
                 <React.Fragment key={item.id}>
                   <div className="search-product">
-                    <figure className="search-product__poster">
+                    <figure
+                      onClick={() =>
+                        dispatch(modalsActions.handleCloseSearch())
+                      }
+                      className="search-product__poster"
+                    >
                       {!item.image ? (
-                        <Link onClick={handleClose} to={`/products/${item.id}`}>
+                        <Link to={`/products/${item.id}`}>
                           <img
                             className="search-product__img search-product__img--null"
                             src={imageNull}
@@ -81,7 +75,7 @@ export default function SearchProduct({ id="modal", handleShow, handleClose }) {
                           />
                         </Link>
                       ) : (
-                        <Link onClick={handleClose} to={`/products/${item.id}`}>
+                        <Link to={`/products/${item.id}`}>
                           <img
                             className="search-product__img"
                             src={item.image}

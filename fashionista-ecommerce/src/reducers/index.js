@@ -4,11 +4,13 @@ import { combineReducers } from "redux"; //resposável por unir os reducers para
 
 import { productsReducers } from "./products";
 import { cartProductsReducers } from "./cartProducts";
+import { modalsReducers } from "./modals"
 // ou import {reducers as getProduct } from "./products" , caso tivessemos outro reducer
 
 const reducers = combineReducers({
   productsReducers,
   cartProductsReducers,
+  modalsReducers
 });
 
 export { reducers };

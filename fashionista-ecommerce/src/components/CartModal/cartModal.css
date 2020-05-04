@@ -1,6 +1,6 @@
 .cart-modal {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   min-height: 100%;
   position: absolute;
   display: flex;
@@ -12,9 +12,25 @@
   padding: 40px 0 40px;
 }
 
+.cart-modal--visible {
+  animation-name: fadeIn;
+  animation-duration: .6s;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateX(350px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .cart-modal__title {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   position: fixed;
   top: 0;
   display: flex;
@@ -129,7 +145,7 @@
 
 .cart-modal__subtotal {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   position: fixed;
   bottom: 0;
   display: flex;

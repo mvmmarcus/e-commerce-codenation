@@ -62,9 +62,9 @@ export default function Product(props) {
     <>
       <div className="container">
         <Header cartProductsCounter={cartCounter} />
-        {showCart && (
-          <CartModal cartProducts={cartProducts} showCart={showCart} />
-        )}
+        {showCart && <div className="back-drop"></div>}
+        <CartModal cartProducts={cartProducts} showCart={showCart} />
+
         {showSearch && (
           <SearchProduct products={products} showSearch={showSearch} />
         )}

@@ -35,7 +35,7 @@
   background: #f0f0f5;
 }
 
-.product__name{
+.product__name {
   font-size: 16px;
 }
 
@@ -53,25 +53,26 @@
 
 .product__size {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 15px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.btn-sizes{
+.btn-sizes {
   width: 30px;
   height: 30px;
   margin-left: 5px;
 }
 
-.btn-sizes--normal{
+.btn-sizes--normal {
   background: #fff;
   border: 1px solid #41414d;
 }
 
-.btn-sizes--selected{
+.btn-sizes--selected {
   border: 2px solid #039703;
 }
 
@@ -79,37 +80,36 @@
   opacity: 0.8;
 }
 
-.alert {
-  width: 100%;
-  max-width: 200px;
-  position: relative;
-  margin-top: 20px;
-  color: #fff;
+.alert-danger {
+  width: 90%;
   font-size: 14px;
   padding: 5px;
+  position: relative;
   text-align: center;
-}
-
-.alert--sucess {
-  background: rgb(204, 226, 204);
-  color: green;
-}
-
-.alert--danger {
   background: rgb(235, 189, 189);
   color: red;
+  border-radius: 5px;
+  opacity: 1;
+  transition: all 0.3s;
 }
 
-.icon--close-alert {
+.alert-danger--hide {
+  opacity: 0;
+  transition: all 0.3s;
+  transform: scale(0);
+}
+
+.icon-close-alert {
   position: absolute;
-  right: 0;
-  top: 0;
-  font-size: 25px;
+  right: 2px;
+  top: 2px;
+  font-size: 16px;
 }
 
 .btn--bag {
   background: #039703;
-  margin-top: 20px;
+  width: 90%;
+  margin-top: 15px;
   padding: 10px;
   color: #fff;
   border: none;
@@ -139,6 +139,24 @@
 }
 
 @media (max-width: 635px) {
+  .alert-danger {
+    width: 90%;
+    max-width: none;
+    position: fixed;
+    bottom: 55px;
+    opacity: 1;
+  }
+
+  .alert-danger--hide {
+    width: 90%;
+    max-width: none;
+    position: fixed;
+    transition: all 0.3s;
+    opacity: 0;
+    bottom: 55px;
+    transform: scale(0);
+  }
+
   .container {
     width: 100%;
     flex-direction: column;
@@ -154,7 +172,7 @@
 
   .product__poster {
     width: 100%;
-    max-width: 300px;
+    max-width: 440px;
     height: 100%;
     cursor: pointer;
     overflow: hidden;
@@ -174,7 +192,7 @@
   .btn--bag {
     position: fixed;
     width: 90%;
-    bottom: 5px;
+    bottom: 10px;
     border-radius: 5px;
   }
 }

@@ -29,30 +29,35 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
   }, [dispatch, searchName, products]);
 
   return (
-    <>
-      {showSearch && (
-        <div id={id} className="modal" onClick={handleOutsideClick}>
+    <div
+      id={id}
+      className={showSearch ? "modal" : "modal modal--hide"}
+      onClick={handleOutsideClick}
+    >
+      <div className="modal__title">
+        <FiX
+          className="icon icon--close"
+          onClick={() => dispatch(modalsActions.handleCloseSearch())}
+        />
+        <input
+          className="search-input"
+          value={searchName}
+          onChange={(e) => onChange(e.target.value)}
+          type="text"
+          placeholder="Pesquise pelo produto..."
+        />
+        {searchName && (
+          <FiX
+            onClick={() => dispatch(onInputChange(""))}
+            className="icon icon--clear"
+          />
+        )}
+      </div>
+      <div className="modal__container">
+        <div className="modal__content">
           <div id="search" className="search-modal">
-            <div className="search-modal__title">
-              <FiX
-                className="search-modal__close-icon"
-                onClick={() => dispatch(modalsActions.handleCloseSearch())}
-              />
-              <input
-                className="search-modal__input"
-                value={searchName}
-                onChange={(e) => onChange(e.target.value)}
-                type="text"
-                placeholder="Pesquise pelo produto..."
-              />
-              <FiX
-                onClick={() => dispatch(onInputChange(""))}
-                className="search-modal__clear-icon"
-                size={18}
-              />
-            </div>
             {filteredItems.length === 0 && (
-              <span className="search-modal__not-found">
+              <span className="msg-not-found">
                 Nenhum resultado encontrado !
               </span>
             )}
@@ -101,7 +106,7 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
             })}
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }

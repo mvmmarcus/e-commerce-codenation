@@ -28,13 +28,13 @@ export default function Home() {
   return (
     <>
       <div className="container">
-        <Header cartProductsCounter={cartCounter} />
-        {showCart && (
-          <CartModal cartProducts={cartProducts} showCart={showCart} />
-        )}
-        {showSearch && (
-          <SearchProduct products={products} showSearch={showSearch} />
-        )}
+        <Header cartProductsCounter={cartCounter} showCart={showCart} />
+        {showCart && <div className="back-drop"></div>}
+        <CartModal cartProducts={cartProducts} showCart={showCart} />
+
+        {showSearch && <div className="back-drop"></div>}
+        <SearchProduct products={products} showSearch={showSearch} />
+
         <div className="catalog">
           <h1 className="catalog__title">Catálogo</h1>
           <span className="catalog__counter">{products.length} items</span>

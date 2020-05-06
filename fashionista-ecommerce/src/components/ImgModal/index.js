@@ -13,18 +13,18 @@ export default function ImgModal({ id = "modal", img, showImg }) {
   };
 
   return (
-    <>
-      {showImg && (
-        <div id={id} className="modal" onClick={handleOutsideClick}>
-          <div className="img-modal__poster">
-            <FiX
-              className="btn btn--close"
-              onClick={() => dispatch(modalsActions.handleCloseImg())}
-            />
-            <img className="img-modal__img" src={img} alt="imgModal" />
-          </div>
-        </div>
-      )}
-    </>
+    <div
+      id={id}
+      className={showImg ? "modal-img" : "modal-img modal-img--hide"}
+      onClick={handleOutsideClick}
+    >
+      <div className="img-modal__poster">
+        <FiX
+          className="btn btn--close"
+          onClick={() => dispatch(modalsActions.handleCloseImg())}
+        />
+        <img className="img-modal__img" src={img} alt="imgModal" />
+      </div>
+    </div>
   );
 }

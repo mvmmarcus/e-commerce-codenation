@@ -115,24 +115,15 @@
   font-weight: 500;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 635px) {
   .cart-modal {
     width: 100%;
     max-width: none;
   }
-
-  .modal__container {
-    width: 100%;
-    max-width: none;
-  }
-
-  .modal__title {
-    width: 100%;
-    max-width: none;
-  }
-
+  
   .modal__footer {
     width: 100%;
     max-width: none;
   }
 }
+

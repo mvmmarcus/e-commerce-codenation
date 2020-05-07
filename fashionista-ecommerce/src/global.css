@@ -28,7 +28,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .content {
@@ -50,12 +49,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .modal--hide {
   transform: translateX(100%);
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .back-drop {
@@ -66,7 +65,7 @@ body {
   background: rgba(59, 59, 59, 0.8);
 }
 
-.modal__container{
+.modal__container {
   flex: 1;
   width: 100%;
   max-width: 350px;
@@ -74,7 +73,7 @@ body {
   min-height: 0;
 }
 
-.modal__content{
+.modal__content {
   width: 100%;
   flex: 1;
   overflow: auto;
@@ -111,4 +110,26 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+
+@media (max-width: 635px) {
+  .modal__container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .modal__content {
+    width: 100%;
+    max-width: none;
+  }
+
+  .modal__title {
+    width: 100%;
+    max-width: none;
+  }
+
+  .modal__footer {
+    width: 100%;
+    max-width: none;
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./searchProduct.css";
 import imageNull from "../../assets/indisponivel.jpg";
@@ -9,24 +9,46 @@ import { productsSelectors } from "../../selectors/products";
 import { filterProducts, onInputChange } from "../../actions/products";
 import { Link } from "react-router-dom";
 import { modalsActions } from "../../actions/modals";
+import useDebounce from "../../services/useDebounce";
 
 export default function SearchProduct({ id = "modal", showSearch, products }) {
   const filteredItems = useSelector(productsSelectors.getFilteredItems);
   let searchName = useSelector(productsSelectors.getSearchNameValue);
 
+  const [isSearching, setIsSearching] = useState(false);
+
+  const dispatch = useDispatch();
+
   const handleOutsideClick = (e) => {
     if (e.target.id === id) dispatch(modalsActions.handleCloseSearch());
   };
 
-  const dispatch = useDispatch();
+  const debouncedSearchTerm = useDebounce(searchName, 300);
 
   const onChange = (searchName) => {
     dispatch(onInputChange(searchName));
   };
 
   useEffect(() => {
-    dispatch(filterProducts(products, searchName));
-  }, [dispatch, searchName, products]);
+    if (searchName !== "" && filteredItems.length === 0) {
+      setIsSearching(true);
+    }
+
+    if (debouncedSearchTerm) {
+      setTimeout(() => {
+        dispatch(filterProducts(products, debouncedSearchTerm));
+        setIsSearching(false);
+      }, 300);
+    } else if (debouncedSearchTerm === "") {
+      dispatch(filterProducts([], ""));
+    }
+  }, [
+    debouncedSearchTerm,
+    dispatch,
+    filteredItems.length,
+    products,
+    searchName,
+  ]);
 
   return (
     <div
@@ -34,13 +56,16 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
       className={showSearch ? "modal" : "modal modal--hide"}
       onClick={handleOutsideClick}
     >
-      <div className="modal__title">
+      <div className="title">
+        Buscar Produtos
         <FiX
           className="icon icon--close"
           onClick={() => dispatch(modalsActions.handleCloseSearch())}
         />
+      </div>
+      <div className="title__form">
         <input
-          className="search-input"
+          className="title__input"
           value={searchName}
           onChange={(e) => onChange(e.target.value)}
           type="text"
@@ -56,11 +81,15 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
       <div className="modal__container">
         <div className="modal__content">
           <div id="search" className="search-modal">
-            {filteredItems.length === 0 && (
-              <span className="msg-not-found">
+            {filteredItems.length === 0 && !isSearching && (
+              <span className="msg msg--not-found">
                 Nenhum resultado encontrado !
               </span>
             )}
+            {isSearching && (
+              <span className="msg msg--searching">Pesquisando...</span>
+            )}
+
             {filteredItems.map((item) => {
               return (
                 <React.Fragment key={item.id}>

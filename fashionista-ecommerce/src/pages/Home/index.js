@@ -40,7 +40,6 @@ export default function Home() {
             <span>Loading...</span>
           ) : (
             <>
-              <h1 className="catalog__title">Catálogo</h1>
               <span className="catalog__counter">{products.length} itens</span>
               <ul className="catalog__list">
                 {products.map((item) => (

@@ -60,6 +60,8 @@
 
 .msg {
   margin-top: 20px;
+  color: #000;
+  font-weight: 500;
 }
 
 .search-product {

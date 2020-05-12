@@ -92,14 +92,19 @@ export default function Product(props) {
                   onClick={() => dispatch(modalsActions.handleShowImg())}
                   className="product__poster"
                 >
-                  {!item.image ? (
-                    <img className="product__img" src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"} alt="Null" />
+                  {item.image ? (
+                    <img
+                      className="product__img"
+                      src={item.image}
+                      alt="Product"
+                    />
                   ) : (
                     <img
                       className="product__img product__img--null"
-                      id="myImage"
-                      src={item.image}
-                      alt="Product"
+                      src={
+                        "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                      }
+                      alt="Null"
                     />
                   )}
                 </figure>
@@ -126,7 +131,11 @@ export default function Product(props) {
                   </div>
 
                   <div
-                    className={showNoSizeSelectedAlert ? "alert-danger" : "alert-danger--hide"}
+                    className={
+                      showNoSizeSelectedAlert
+                        ? "alert-danger"
+                        : "alert-danger--hide"
+                    }
                   >
                     <FiX
                       className="icon-close-alert"

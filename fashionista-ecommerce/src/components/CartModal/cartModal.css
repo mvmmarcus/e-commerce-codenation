@@ -21,7 +21,8 @@
 .is-empty-msg {
   text-align: center;
   margin-top: 20px;
-  color: #41414d;
+  color: #000;
+  font-weight: 500;
 }
 
 .cart-product {

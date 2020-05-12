@@ -56,7 +56,7 @@ export default function CartModal({
             >
               {isEmpty && (
                 <span className="is-empty-msg">
-                  O carrinho está vazio!
+                  O carrinho está vazio !
                 </span>
               )}
               {cartProducts.map((item) => {

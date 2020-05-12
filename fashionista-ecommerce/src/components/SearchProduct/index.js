@@ -76,7 +76,7 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
             onClick={() => dispatch(onInputChange(""))}
             className="icon icon--clear"
           />
-          <span className="msg msg--items-found" >{filteredItems.length} itens</span>
+          <span className="msg msg--items-found" >itens: {filteredItems.length}</span>
           </>
         )}
       </div>

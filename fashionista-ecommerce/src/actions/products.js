@@ -9,7 +9,7 @@ export const fetchProducts = () => {
         (response) =>
           dispatch({
             type: actionsTypes.PRODUCTS_FETCH_SUCESS,
-            payload: response.data.products, // aqui é onde eu "escolho" qual objeto eu quero pegar da resposta da api
+            payload: response.data, // aqui é onde eu "escolho" qual objeto eu quero pegar da resposta da api
           }),
         (error) =>
           dispatch({

@@ -1,7 +1,6 @@
 import React from "react";
 
 import "./cartModal.css";
-import imageNull from "../../assets/indisponivel.jpg";
 import { FiX, FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -73,7 +72,7 @@ export default function CartModal({
                         >
                           <img
                             className="cart-product__img cart-product__img--null"
-                            src={imageNull}
+                            src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"}
                             alt="Null"
                           />
                         </Link>

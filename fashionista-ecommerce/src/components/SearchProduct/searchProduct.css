@@ -30,6 +30,11 @@
   font: 400 14px Roboto, sans-serif;
 }
 
+.msg--items-found{
+  opacity: 0.6;
+  font-size: 12px;
+}
+
 .icon--clear {
   position: absolute;
   top: 52px;

@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1180px;
   min-height: 100vh;
-  padding: 60px 10px 10px;
+  padding: 60px;
   display: flex;
   justify-content: center;
   background: #fff;
@@ -32,7 +32,6 @@
   align-items: center;
   padding: 10px;
   color: #41414d;
-  background: #f0f0f5;
 }
 
 .product__name {
@@ -104,6 +103,7 @@
   right: 2px;
   top: 2px;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .btn--bag {

@@ -13,7 +13,6 @@ import { cartProductsSelectors } from "../../selectors/cartProducts";
 import { addItemToCart } from "../../actions/cartProducts";
 import { productsSelectors } from "../../selectors/products";
 import { fetchProducts, onSelectSize } from "../../actions/products";
-import imageNull from "../../assets/indisponivel.jpg";
 import { modalsSelectors } from "../../selectors/modals";
 import { modalsActions } from "../../actions/modals";
 
@@ -94,7 +93,7 @@ export default function Product(props) {
                   className="product__poster"
                 >
                   {!item.image ? (
-                    <img className="product__img" src={imageNull} alt="Null" />
+                    <img className="product__img" src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"} alt="Null" />
                   ) : (
                     <img
                       className="product__img product__img--null"

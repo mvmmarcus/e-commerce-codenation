@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import "./searchProduct.css";
-import imageNull from "../../assets/indisponivel.jpg";
 import { FiX } from "react-icons/fi";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -72,10 +71,13 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
           placeholder="Pesquise pelo produto..."
         />
         {searchName && (
+          <>
           <FiX
             onClick={() => dispatch(onInputChange(""))}
             className="icon icon--clear"
           />
+          <span className="msg msg--items-found" >{filteredItems.length} itens</span>
+          </>
         )}
       </div>
       <div className="modal__container">
@@ -104,7 +106,7 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
                         <Link to={`/products/${item.id}`}>
                           <img
                             className="search-product__img search-product__img--null"
-                            src={imageNull}
+                            src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"}
                             alt="img null"
                           />
                         </Link>

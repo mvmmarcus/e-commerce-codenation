@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1180px;
   min-height: 100vh;
-  padding: 60px;
+  padding-top: 70px;
   display: flex;
   justify-content: center;
   background: #fff;
@@ -45,7 +45,7 @@
 }
 
 .product__price--parcel {
-  color: red;
+  opacity: 0.6;
   margin-top: 10px;
   font-size: 14px;
 }

@@ -10,6 +10,7 @@ export default function Header({ cartProductsCounter, showAddCartAlert }) {
   const dispatch = useDispatch();
   return (
     <div className="header">
+      <div className="header__content">
       <>
         <Link className="link link--home" to="/">
           Fashionista
@@ -36,6 +37,7 @@ export default function Header({ cartProductsCounter, showAddCartAlert }) {
           </div>
         </div>
       </>
+      </div>
     </div>
   );
 }

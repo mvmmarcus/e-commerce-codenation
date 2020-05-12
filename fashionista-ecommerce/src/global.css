@@ -24,21 +24,20 @@ body {
 
 .container {
   width: 100%;
-  background: #f0f0f5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("./assets/background.png");
 }
 
 .content {
-  background: #fff;
   color: #41414d;
   width: 100%;
   min-height: 100vh;
   max-width: 1180px;
-  padding: 60px 30px 15px;
+  padding: 60px 5px 10px;
   display: flex;
-  position: relative;
+  flex-direction: column;
 }
 
 .modal {
@@ -82,15 +81,17 @@ body {
 .modal__title {
   width: 100%;
   max-width: 350px;
+  height: 60px;
   display: flex;
   color: #41414d;
   position: relative;
   justify-content: center;
+  align-items: center;
   font-weight: 500;
   font-size: 16px;
-  background: #f0f0f5;
+  background: #ccc;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #41414d;
 }
 
 .icon {

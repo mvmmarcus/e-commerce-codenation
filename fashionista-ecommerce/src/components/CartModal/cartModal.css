@@ -5,8 +5,9 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  background: #fff;
+  background-image: url("../../assets/background.png");
   color: #41414d;
+  padding: 10px 10px 0;
 }
 
 .icon--close {
@@ -24,12 +25,14 @@
 }
 
 .cart-product {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #ccc;
+  background: #fff;
+  margin-bottom: 10px;
 }
 
 .cart-product__poster {
@@ -101,14 +104,15 @@
 .modal__footer {
   width: 100%;
   max-width: 350px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #41414d;
-  background: #f0f0f5;
+  background: #ccc;
   padding: 10px;
   font-size: 16px;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #41414d;
 }
 
 .cart-modal__subtotal-price {
@@ -120,10 +124,9 @@
     width: 100%;
     max-width: none;
   }
-  
+
   .modal__footer {
     width: 100%;
     max-width: none;
   }
 }
-

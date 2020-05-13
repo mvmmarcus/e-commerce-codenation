@@ -81,7 +81,7 @@
 .alert-danger {
   width: 90%;
   font-size: 14px;
-  padding: 5px;
+  padding: 10px;
   position: relative;
   text-align: center;
   background: rgb(235, 189, 189);
@@ -97,12 +97,11 @@
   transform: scale(0);
 }
 
-.icon-close-alert {
+.icon--close-alert {
   position: absolute;
-  right: 2px;
-  top: 2px;
-  font-size: 16px;
-  cursor: pointer;
+  right: 0;
+  top: 0;
+  font-size: 26px;
 }
 
 .btn--bag {

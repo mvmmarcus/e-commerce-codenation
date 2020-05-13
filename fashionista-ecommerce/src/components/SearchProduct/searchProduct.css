@@ -37,11 +37,11 @@
   font-size: 12px;
 }
 
-.icon--clear {
+.icon--clear-text {
   position: absolute;
-  top: 52px;
+  top: 54px;
   right: 12px;
-  font-size: 24px;
+  font-size: 28px;
   color: #ccc;
   cursor: pointer;
 }

@@ -58,7 +58,7 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
       <div className="title">
         Buscar Produtos
         <FiX
-          className="icon icon--close"
+          className="icon icon--close-modal"
           onClick={() => dispatch(modalsActions.handleCloseSearch())}
         />
       </div>
@@ -74,7 +74,7 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
           <>
           <FiX
             onClick={() => dispatch(onInputChange(""))}
-            className="icon icon--clear"
+            className="icon icon--clear-text"
           />
           <span className="msg msg--items-found" >itens: {filteredItems.length}</span>
           </>

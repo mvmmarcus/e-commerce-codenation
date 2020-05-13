@@ -10,14 +10,6 @@
   padding: 10px 10px 0;
 }
 
-.icon--close {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 30px;
-  color: #41414d;
-}
-
 .is-empty-msg {
   text-align: center;
   margin-top: 20px;
@@ -85,6 +77,14 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.icon--more {
+  font-size: 34px;
+}
+
+.icon--less {
+  font-size: 34px;
 }
 
 .cart-product__price {

@@ -18,18 +18,11 @@
   font-weight: 400;
 }
 
-.icon {
-  padding: 5px;
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-  font-size: 28px;
-}
-
 .icon--face {
   margin-left: 5px;
+  font-size: 32px;
 }
 
-.icon:hover {
-  opacity: 0.6;
+.icon--insta {
+  font-size: 32px;
 }
-

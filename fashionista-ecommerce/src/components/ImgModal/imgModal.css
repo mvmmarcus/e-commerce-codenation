@@ -22,14 +22,6 @@
   overflow: hidden;
 }
 
-.btn--close {
-  position: absolute;
-  font-size: 24px;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-}
-
 .img-modal__img {
   width: 100%;
   height: auto;

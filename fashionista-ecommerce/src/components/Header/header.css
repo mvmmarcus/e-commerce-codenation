@@ -23,6 +23,11 @@
 
 .icon--cart {
   margin-left: 5px;
+  font-size: 32px;
+}
+
+.icon--search{
+  font-size: 32px;
 }
 
 .cart-counter {

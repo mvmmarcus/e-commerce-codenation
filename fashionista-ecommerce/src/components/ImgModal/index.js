@@ -20,7 +20,7 @@ export default function ImgModal({ id = "modal", img, showImg }) {
     >
       <div className="img-modal__poster">
         <FiX
-          className="btn btn--close"
+          className="icon icon--close-modal"
           onClick={() => dispatch(modalsActions.handleCloseImg())}
         />
         <img className="img-modal__img" src={img} alt="imgModal" />

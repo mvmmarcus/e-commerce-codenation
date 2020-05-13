@@ -24,7 +24,8 @@ export default function Product(props) {
 
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
-  let selectedSize = useSelector(productsSelectors.getSelectedSize);
+  const loading = useSelector(productsSelectors.loading);
+  const selectedSize = useSelector(productsSelectors.getSelectedSize);
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
   const showCart = useSelector(modalsSelectors.getCartModalState);
   const showSearch = useSelector(modalsSelectors.getSearchModalState);
@@ -63,104 +64,110 @@ export default function Product(props) {
     }
   };
   return (
-    <>
-      <div className="container">
-        <Header
-          cartProductsCounter={cartCounter}
-          showAddCartAlert={showAddCartAlert}
-        />
-        {showCart && <div className="back-drop"></div>}
-        <CartModal cartProducts={cartProducts} showCart={showCart} />
-        {showSearch && <div className="back-drop"></div>}
-        <SearchProduct products={products} showSearch={showSearch} />
+    <div className="container">
+      {loading ? (
+        <div className="loading">
+          <div className="loading__indeterminate"></div>
+        </div>
+      ) : (
+        <>
+          <Header
+            cartProductsCounter={cartCounter}
+            showAddCartAlert={showAddCartAlert}
+          />
+          {showCart && <div className="back-drop"></div>}
+          <CartModal cartProducts={cartProducts} showCart={showCart} />
+          {showSearch && <div className="back-drop"></div>}
+          <SearchProduct products={products} showSearch={showSearch} />
 
-        {showImg && <div className="back-drop"></div>}
-        {products.map((item) => {
-          if (item.id === id) {
-            return (
-              <ImgModal key={item.id} img={item.image} showImg={showImg} />
-            );
-          }
-          return null;
-        })}
+          {showImg && <div className="back-drop"></div>}
+          {products.map((item) => {
+            if (item.id === id) {
+              return (
+                <ImgModal key={item.id} img={item.image} showImg={showImg} />
+              );
+            }
+            return null;
+          })}
 
-        {products.map((item) => {
-          if (item.id === id) {
-            return (
-              <div key={item.id} className="product">
-                <figure
-                  onClick={() => dispatch(modalsActions.handleShowImg())}
-                  className="product__poster"
-                >
-                  {item.image ? (
-                    <img
-                      className="product__img"
-                      src={item.image}
-                      alt="Product"
-                    />
-                  ) : (
-                    <img
-                      className="product__img product__img--null"
-                      src={
-                        "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+          {products.map((item) => {
+            if (item.id === id) {
+              return (
+                <div key={item.id} className="product">
+                  <figure
+                    onClick={() => dispatch(modalsActions.handleShowImg())}
+                    className="product__poster"
+                  >
+                    {item.image ? (
+                      <img
+                        className="product__img"
+                        src={item.image}
+                        alt="Product"
+                      />
+                    ) : (
+                      <img
+                        className="product__img product__img--null"
+                        src={
+                          "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                        }
+                        alt="Null"
+                      />
+                    )}
+                  </figure>
+                  <section className="product__description">
+                    <strong className="product__name">{item.name}</strong>
+                    <span className="product__price">{item.actual_price}</span>
+                    <span className="product__price product__price--parcel">
+                      Em até {item.installments}
+                    </span>
+                    <div className="product__size">
+                      {item.sizes.map((size) => {
+                        return (
+                          size.available && (
+                            <button
+                              key={size.sku}
+                              onClick={() => handleSelectSize(size.size)}
+                              className="btn-sizes btn-sizes--normal"
+                            >
+                              {size.size}
+                            </button>
+                          )
+                        );
+                      })}
+                    </div>
+
+                    <div
+                      className={
+                        showNoSizeSelectedAlert
+                          ? "alert-danger"
+                          : "alert-danger--hide"
                       }
-                      alt="Null"
-                    />
-                  )}
-                </figure>
-                <section className="product__description">
-                  <strong className="product__name">{item.name}</strong>
-                  <span className="product__price">{item.actual_price}</span>
-                  <span className="product__price product__price--parcel">
-                    Em até {item.installments}
-                  </span>
-                  <div className="product__size">
-                    {item.sizes.map((size) => {
-                      return (
-                        size.available && (
-                          <button
-                            key={size.sku}
-                            onClick={() => handleSelectSize(size.size)}
-                            className="btn-sizes btn-sizes--normal"
-                          >
-                            {size.size}
-                          </button>
-                        )
-                      );
-                    })}
-                  </div>
+                    >
+                      <FiX
+                        className="icon icon--close-alert"
+                        onClick={() => setShowNoSizeSelectedAlert(false)}
+                      />
+                      Selecione um tamanho !
+                    </div>
 
-                  <div
-                    className={
-                      showNoSizeSelectedAlert
-                        ? "alert-danger"
-                        : "alert-danger--hide"
-                    }
-                  >
-                    <FiX
-                      className="icon-close-alert"
-                      onClick={() => setShowNoSizeSelectedAlert(false)}
-                    />
-                    Selecione um tamanho !
-                  </div>
-
-                  <button
-                    className="btn btn--bag"
-                    onClick={() => handleAddProductToCart(item, selectedSize)}
-                  >
-                    Adicionar ao carrinho
-                  </button>
-                  <Link className="link link--back" to="/">
-                    <FiArrowLeft className="icon icon--back" />
-                    Voltar para home
-                  </Link>
-                </section>
-              </div>
-            );
-          }
-          return null;
-        })}
-      </div>
-    </>
+                    <button
+                      className="btn btn--bag"
+                      onClick={() => handleAddProductToCart(item, selectedSize)}
+                    >
+                      Adicionar ao carrinho
+                    </button>
+                    <Link className="link link--back" to="/">
+                      <FiArrowLeft className="icon icon--back" />
+                      Voltar para home
+                    </Link>
+                  </section>
+                </div>
+              );
+            }
+            return null;
+          })}
+        </>
+      )}
+    </div>
   );
 }

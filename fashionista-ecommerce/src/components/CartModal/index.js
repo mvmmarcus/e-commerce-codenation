@@ -9,11 +9,7 @@ import { modalsActions } from "../../actions/modals";
 import { Link } from "react-router-dom";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
-export default function CartModal({
-  id = "modal",
-  cartProducts,
-  showCart,
-}) {
+export default function CartModal({ id = "modal", cartProducts, showCart }) {
   const dispatch = useDispatch();
   const total = useSelector(cartProductsSelectors.total);
   const isEmpty = useSelector(cartProductsSelectors.cartProductsIsEmpty);
@@ -38,10 +34,9 @@ export default function CartModal({
         className={showCart ? "modal" : "modal modal--hide"}
         onClick={handleOutsideClick}
       >
-
         <div className="modal__title">
           <FiX
-            className="icon icon--close"
+            className="icon icon--close-modal"
             onClick={() => dispatch(modalsActions.handleCloseCart())}
           />
           Carrinho ({cartCounter})
@@ -55,9 +50,7 @@ export default function CartModal({
               }
             >
               {isEmpty && (
-                <span className="is-empty-msg">
-                  O carrinho está vazio !
-                </span>
+                <span className="is-empty-msg">O carrinho está vazio !</span>
               )}
               {cartProducts.map((item) => {
                 return (
@@ -72,7 +65,9 @@ export default function CartModal({
                         >
                           <img
                             className="cart-product__img cart-product__img--null"
-                            src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"}
+                            src={
+                              "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                            }
                             alt="Null"
                           />
                         </Link>
@@ -109,14 +104,14 @@ export default function CartModal({
                       </span>
                       <div className="cart-product__qty">
                         <FiMinusCircle
-                          className="icon icon--more"
+                          className="icon icon--less"
                           onClick={() => handleDecrementCount(item.cartId)}
                         />
                         <span className="cart-product__counter">
                           {item.qty}
                         </span>
                         <FiPlusCircle
-                          className="icon icon--less"
+                          className="icon icon--more"
                           onClick={() => handleIncrementCount(item.cartId)}
                         />
                       </div>

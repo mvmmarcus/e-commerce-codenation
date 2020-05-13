@@ -25,22 +25,23 @@ export default function Home() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log(products);
-
   return (
-    <>
-      <div className="container">
-        <Header cartProductsCounter={cartCounter} showCart={showCart} />
-        {showCart && <div className="back-drop"></div>}
-        <CartModal cartProducts={cartProducts} showCart={showCart} />
+    <div className="container">
+      {loading ? (
+        <div className="loading">
+          <div className="loading__indeterminate"></div>
+        </div>
+      ) : (
+        <>
+          <Header cartProductsCounter={cartCounter} showCart={showCart} />
 
-        {showSearch && <div className="back-drop"></div>}
-        <SearchProduct products={products} showSearch={showSearch} />
-        <div className="content">
-          <div className="catalog">
-            {loading ? (
-              <span>Loading...</span>
-            ) : (
+          {showCart && <div className="back-drop"></div>}
+          <CartModal cartProducts={cartProducts} showCart={showCart} />
+
+          {showSearch && <div className="back-drop"></div>}
+          <SearchProduct products={products} showSearch={showSearch} />
+          <div className="content">
+            <div className="catalog">
               <>
                 <span className="catalog__counter">
                   {products.length} itens
@@ -95,11 +96,11 @@ export default function Home() {
                   ))}
                 </ul>
               </>
-            )}
+            </div>
           </div>
-        </div>
-        <Footer />
-      </div>
-    </>
+          <Footer />
+        </>
+      )}
+    </div>
   );
 }

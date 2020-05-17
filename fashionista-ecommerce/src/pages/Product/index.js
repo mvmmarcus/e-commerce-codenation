@@ -47,6 +47,13 @@ export default function Product(props) {
 
     setShowAddCartAlert(true);
 
+    const btn = document.getElementById("btn");
+    btn.classList.add("touch");
+
+    setTimeout(() => {
+      btn.classList.remove("touch");
+    }, 500);
+
     setTimeout(() => {
       setShowAddCartAlert(false);
     }, 800);
@@ -63,6 +70,7 @@ export default function Product(props) {
       if (value.innerHTML === size) value.classList.add("btn-sizes--selected");
     }
   };
+
   return (
     <div className="container">
       {loading ? (
@@ -151,6 +159,7 @@ export default function Product(props) {
                     </div>
 
                     <button
+                      id="btn"
                       className="btn btn--bag"
                       onClick={() => handleAddProductToCart(item, selectedSize)}
                     >

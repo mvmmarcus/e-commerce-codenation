@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import "./home.css";
 import { Link } from "react-router-dom";
+import { FiArrowUp } from "react-icons/fi";
 import CartModal from "../../components/CartModal";
 import SearchProduct from "../../components/SearchProduct";
 import { fetchProducts } from "../../actions/products";
@@ -25,8 +26,31 @@ export default function Home() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const linkToTop = document.getElementById("link-top-home");
+
+  window.onscroll = () => {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      linkToTop.classList.add("move-to-top--visible");
+
+      linkToTop.addEventListener("click", (event) => {
+        event.preventDefault();
+        const id = linkToTop.getAttribute("href");
+        const to = document.querySelector(id.split("/")[1]).offsetTop;
+        window.scroll({
+          top: to,
+          behavior: "smooth",
+        });
+      });
+    } else {
+      linkToTop.classList.remove("move-to-top--visible");
+    }
+  };
+
   return (
-    <div className="container">
+    <div id="top" className="container">
       {loading ? (
         <div className="loading">
           <div className="loading__indeterminate"></div>
@@ -101,6 +125,15 @@ export default function Home() {
           <Footer />
         </>
       )}
+
+      <Link
+        title="Ir para o topo"
+        id="link-top-home"
+        className="move-to-top"
+        to="#top"
+      >
+        <FiArrowUp className="icon icon--move-to-top" />
+      </Link>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import "./searchProduct.css";
-import { FiX } from "react-icons/fi";
+import { FiX, FiArrowUp } from "react-icons/fi";
 
 import { useSelector, useDispatch } from "react-redux";
 import { productsSelectors } from "../../selectors/products";
@@ -49,6 +49,27 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
     searchName,
   ]);
 
+  const linkToTop = document.getElementById("link-top-search");
+  const modalContent = document.getElementById("search-content");
+
+  if (showSearch) {
+    modalContent.onscroll = () => {
+      if (modalContent.scrollTop > 20) {
+        linkToTop.classList.add("move-to-top--visible");
+
+        linkToTop.addEventListener("click", (event) => {
+          event.preventDefault();
+          modalContent.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      } else {
+        linkToTop.classList.remove("move-to-top--visible");
+      }
+    };
+  }
+
   return (
     <div
       id={id}
@@ -72,16 +93,18 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
         />
         {searchName && (
           <>
-          <FiX
-            onClick={() => dispatch(onInputChange(""))}
-            className="icon icon--clear-text"
-          />
-          <span className="msg msg--items-found" >itens: {filteredItems.length}</span>
+            <FiX
+              onClick={() => dispatch(onInputChange(""))}
+              className="icon icon--clear-text"
+            />
+            <span className="msg msg--items-found">
+              itens: {filteredItems.length}
+            </span>
           </>
         )}
       </div>
       <div className="modal__container">
-        <div className="modal__content">
+        <div id="search-content" className="modal__content">
           <div id="search" className="search-modal">
             {filteredItems.length === 0 && !isSearching && (
               <span className="msg msg--not-found">
@@ -106,7 +129,9 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
                         <Link to={`/products/${item.id}`}>
                           <img
                             className="search-product__img search-product__img--null"
-                            src={"https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"}
+                            src={
+                              "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                            }
                             alt="img null"
                           />
                         </Link>
@@ -138,6 +163,14 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
           </div>
         </div>
       </div>
+      <Link
+        title="Ir para o topo"
+        id="link-top-search"
+        className="move-to-top"
+        to="#top"
+      >
+        <FiArrowUp className="icon icon--move-to-top" />
+      </Link>
     </div>
   );
 }

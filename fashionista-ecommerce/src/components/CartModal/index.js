@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./cartModal.css";
-import { FiX, FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import { FiX, FiMinusCircle, FiPlusCircle, FiArrowUp } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../actions/cartProducts";
@@ -27,6 +27,27 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
     dispatch(actions.decrementCount(cartId));
   };
 
+  const linkToTop = document.getElementById("link-top-cart");
+  const modalContent = document.getElementById("cart-content");
+
+  if (showCart) {
+    modalContent.onscroll = () => {
+      if (modalContent.scrollTop > 20) {
+        linkToTop.classList.add("move-to-top--visible-modal");
+
+        linkToTop.addEventListener("click", (event) => {
+          event.preventDefault();
+          modalContent.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      } else {
+        linkToTop.classList.remove("move-to-top--visible-modal");
+      }
+    };
+  }
+
   return (
     <>
       <div
@@ -42,7 +63,7 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
           Carrinho ({cartCounter})
         </div>
         <div className="modal__container">
-          <div className="modal__content">
+          <div id="cart-content" className="modal__content">
             <div
               id="cart"
               className={
@@ -142,6 +163,14 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
             Subtotal: R$ {total.toFixed(2)}
           </span>
         </div>
+        <Link
+          title="Ir para o topo"
+          id="link-top-cart"
+          className="move-to-top"
+          to="#top"
+        >
+          <FiArrowUp className="icon icon--move-to-top" />
+        </Link>
       </div>
     </>
   );

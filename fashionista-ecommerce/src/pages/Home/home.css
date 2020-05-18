@@ -96,7 +96,7 @@
   display: block;
   font-size: 14px;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 10px;
 }
 
@@ -111,6 +111,7 @@
 .catalog__price {
   color: red;
   text-decoration: line-through;
+  font-weight: bold;
   margin-right: 20px;
   font-size: 12px;
 }
@@ -129,7 +130,7 @@
   }
 }
 
-@media (max-width: 424px) {
+@media (max-width: 426px) {
   .catalog__item {
     width: 100%;
   }

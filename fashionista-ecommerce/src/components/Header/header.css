@@ -21,6 +21,10 @@
   box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.3);
 }
 
+.header__content a {
+  font-weight: 700;
+}
+
 .icon--cart {
   margin-left: 5px;
   font-size: 32px;

@@ -8,6 +8,7 @@ import "./global.css";
 import { store } from "./store";
 
 function App() {
+  
   return (
     <Provider store={store}>
       <Routes />

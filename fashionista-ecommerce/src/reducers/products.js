@@ -2,7 +2,7 @@ import { actionsTypes } from "../constants/products";
 
 const INITIAL_STATE = {
   products: [],
-  loading: false,
+  loading: true,
   error: "",
   filteredItems: [],
   name: "",

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 import { addItemToCart } from "../../actions/cartProducts";
 import { productsSelectors } from "../../selectors/products";
-import { fetchProducts, onSelectSize } from "../../actions/products";
+import { onSelectSize } from "../../actions/products";
 import { modalsSelectors } from "../../selectors/modals";
 import { modalsActions } from "../../actions/modals";
 
@@ -34,7 +34,6 @@ export default function Product(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchProducts());
     dispatch(onSelectSize(""));
     setId(parseInt(props.match.params.id));
   }, [dispatch, props.match.params.id]);

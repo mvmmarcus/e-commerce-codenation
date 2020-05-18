@@ -60,7 +60,7 @@
 
 .cart-product__name {
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -87,10 +87,14 @@
   font-size: 34px;
 }
 
+.click {
+  transform: scale(0.9);
+}
+
 .cart-product__price {
   color: red;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: bold;
   text-decoration: line-through;
   margin-bottom: 10px;
 }
@@ -98,7 +102,7 @@
 .cart-product__price--promo {
   color: #41414d;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 16px;
 }
 
@@ -115,7 +119,7 @@
   background: #ccc;
   padding: 10px;
   font-size: 16px;
-  box-shadow: 0px -5px 4px rgba(0,0,0,.30);
+  box-shadow: 0px -5px 4px rgba(0, 0, 0, 0.3);
 }
 
 .cart-modal__subtotal-price {

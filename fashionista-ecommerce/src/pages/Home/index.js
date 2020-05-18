@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 import { FiArrowUp } from "react-icons/fi";
 import CartModal from "../../components/CartModal";
 import SearchProduct from "../../components/SearchProduct";
-import { fetchProducts } from "../../actions/products";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { productsSelectors } from "../../selectors/products";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
 import { modalsSelectors } from "../../selectors/modals";
 
 export default function Home() {
-  const dispatch = useDispatch();
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
@@ -23,34 +21,29 @@ export default function Home() {
   const showSearch = useSelector(modalsSelectors.getSearchModalState);
 
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
+    const linkToTop = document.getElementById("link-top-home");
+    window.onscroll = () => {
+      if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+      ) {
+        linkToTop.classList.add("move-to-top--visible");
 
-  const linkToTop = document.getElementById("link-top-home");
-
-  window.onscroll = () => {
-    if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
-    ) {
-      linkToTop.classList.add("move-to-top--visible");
-
-      linkToTop.addEventListener("click", (event) => {
-        event.preventDefault();
-        const id = linkToTop.getAttribute("href");
-        const to = document.querySelector(id.split("/")[1]).offsetTop;
-        window.scroll({
-          top: to,
-          behavior: "smooth",
+        linkToTop.addEventListener("click", (event) => {
+          event.preventDefault();
+          window.scroll({
+            top: 0,
+            behavior: "smooth",
+          });
         });
-      });
-    } else {
-      linkToTop.classList.remove("move-to-top--visible");
-    }
-  };
+      } else if (linkToTop.classList.contains("move-to-top--visible")) {
+        linkToTop.classList.remove("move-to-top--visible");
+      }
+    };
+  }, []);
 
   return (
-    <div id="top" className="container">
+    <div className="container">
       {loading ? (
         <div className="loading">
           <div className="loading__indeterminate"></div>
@@ -127,10 +120,10 @@ export default function Home() {
       )}
 
       <Link
+        to="#"
         title="Ir para o topo"
         id="link-top-home"
         className="move-to-top"
-        to="#top"
       >
         <FiArrowUp className="icon icon--move-to-top" />
       </Link>

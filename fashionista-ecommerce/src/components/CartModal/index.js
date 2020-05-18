@@ -46,6 +46,16 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
         linkToTop.classList.remove("move-to-top--visible-modal");
       }
     };
+
+    const btnQtys = document.querySelectorAll(".cart-product__qty .icon");
+    btnQtys.forEach((item) => {
+      item.addEventListener("click", () => {
+        item.classList.add("click");
+        setTimeout(() => {
+          item.classList.remove("click");
+        }, 200);
+      });
+    });
   }
 
   return (
@@ -167,7 +177,7 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
           title="Ir para o topo"
           id="link-top-cart"
           className="move-to-top"
-          to="#top"
+          to="#"
         >
           <FiArrowUp className="icon icon--move-to-top" />
         </Link>

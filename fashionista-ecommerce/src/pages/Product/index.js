@@ -127,17 +127,19 @@ export default function Product(props) {
                     <span className="product__price product__price--parcel">
                       Em até {item.installments}
                     </span>
-                    <div className="product__size">
+                    <div className="product__sizes">
                       {item.sizes.map((size) => {
                         return (
                           size.available && (
-                            <button
-                              key={size.sku}
-                              onClick={() => handleSelectSize(size.size)}
-                              className="btn-sizes btn-sizes--normal"
-                            >
-                              {size.size}
-                            </button>
+                            <div className="product__size">
+                              <button
+                                key={size.sku}
+                                onClick={() => handleSelectSize(size.size)}
+                                className="btn-sizes btn-sizes--normal"
+                              >
+                                {size.size}
+                              </button>
+                            </div>
                           )
                         );
                       })}

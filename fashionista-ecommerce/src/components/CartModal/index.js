@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./cartModal.css";
-import { FiX, FiMinusCircle, FiPlusCircle, FiArrowUp } from "react-icons/fi";
+import { FiX, FiMinus, FiPlus, FiArrowUp, FiTrash2 } from "react-icons/fi";
 
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../actions/cartProducts";
@@ -46,16 +46,6 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
         linkToTop.classList.remove("move-to-top--visible-modal");
       }
     };
-
-    const btnQtys = document.querySelectorAll(".cart-product__qty .icon");
-    btnQtys.forEach((item) => {
-      item.addEventListener("click", () => {
-        item.classList.add("click");
-        setTimeout(() => {
-          item.classList.remove("click");
-        }, 200);
-      });
-    });
   }
 
   return (
@@ -116,14 +106,6 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
                           />
                         </Link>
                       )}
-                      <button
-                        onClick={() =>
-                          dispatch(actions.removeItemFromCart(item.cartId))
-                        }
-                        className="btn btn--remove"
-                      >
-                        Remover
-                      </button>
                     </figure>
 
                     <section className="cart-product__description">
@@ -134,15 +116,15 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
                         Tam: {item.selectedSize}
                       </span>
                       <div className="cart-product__qty">
-                        <FiMinusCircle
-                          className="icon icon--less"
+                        <FiMinus
+                          className="icon--less"
                           onClick={() => handleDecrementCount(item.cartId)}
                         />
                         <span className="cart-product__counter">
                           {item.qty}
                         </span>
-                        <FiPlusCircle
-                          className="icon icon--more"
+                        <FiPlus
+                          className="icon--more"
                           onClick={() => handleIncrementCount(item.cartId)}
                         />
                       </div>
@@ -161,6 +143,12 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
                           {item.product.actual_price}
                         </span>
                       )}
+                      <FiTrash2
+                        className="icon icon--remove"
+                        onClick={() =>
+                          dispatch(actions.removeItemFromCart(item.cartId))
+                        }
+                      />
                     </section>
                   </div>
                 );

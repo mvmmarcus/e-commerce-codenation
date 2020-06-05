@@ -16,3 +16,44 @@ Como um profissional front-end, você será responsável por desenvolver as prin
 👉 [https://fashionista-codenation-marcus.netlify.app/](https://fashionista-codenation-marcus.netlify.app/)
 
 <img src="docs\Fashionista.gif" width="auto" style="border: 2px solid black; margin: auto" >
+
+## Tópicos abordados no projeto:
+
+* React
+* Redux
+* React Redux
+* Redux-Thunk
+* Redux-Persist
+* React Router DOM
+* React Hooks
+* PWA
+* JS Funcional
+* Modularização: `BEM` (Bloco, Elemento e Modificador)
+* Rails-Style Structure
+* Axios
+* Mobile First
+
+## Sobre o Fashionista E-commerce:
+Trata-se de um e-commerce de moda feminina, onde o usuário pode:
+* Visualizar os produtos
+* Adicionar produtos ao carrinho
+* Remover ou aumentar a quantidade de produtos no carrinho
+* Pesquisar em tempo real pelos produtos
+
+## Dependências Necessárias
+```json
+{
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.9.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0"
+}

@@ -5,7 +5,7 @@ import { Provider } from "react-redux"; //responsavel por "conectar todos os com
 
 import "./global.css";
 
-import { store } from "./store";
+import { store } from "./store/index";
 
 function App() {
   

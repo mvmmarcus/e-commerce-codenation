@@ -15,11 +15,11 @@ import { productsSelectors } from "../../selectors/products";
 import { onSelectSize } from "../../actions/products";
 import { modalsSelectors } from "../../selectors/modals";
 import { modalsActions } from "../../actions/modals";
+import Loading from "../../components/Loading";
 
 export default function Product(props) {
   const [showAddCartAlert, setShowAddCartAlert] = useState(false);
   const [showNoSizeSelectedAlert, setShowNoSizeSelectedAlert] = useState(false);
-
   let [id, setId] = useState(Number);
 
   const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
@@ -73,9 +73,7 @@ export default function Product(props) {
   return (
     <div className="container">
       {loading ? (
-        <div className="loading">
-          <div className="loading__indeterminate"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <Header
@@ -100,77 +98,82 @@ export default function Product(props) {
           {products.map((item) => {
             if (item.id === id) {
               return (
-                <div key={item.id} className="product">
-                  <figure
-                    onClick={() => dispatch(modalsActions.handleShowImg())}
-                    className="product__poster"
-                  >
-                    {item.image ? (
-                      <img
-                        className="product__img"
-                        src={item.image}
-                        alt="Product"
-                      />
-                    ) : (
-                      <img
-                        className="product__img product__img--null"
-                        src={
-                          "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                <div key={item.id} className="content">
+                  <div className="product">
+                    <figure
+                      onClick={() => dispatch(modalsActions.handleShowImg())}
+                      className="product__poster"
+                    >
+                      {item.image ? (
+                        <img
+                          className="product__img"
+                          src={item.image}
+                          alt="Product"
+                        />
+                      ) : (
+                        <img
+                          className="product__img product__img--null"
+                          src={
+                            "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
+                          }
+                          alt="Null"
+                        />
+                      )}
+                    </figure>
+                    <section className="product__description">
+                      <strong className="product__name">{item.name}</strong>
+                      <span className="product__price">
+                        {item.actual_price}
+                      </span>
+                      <span className="product__price product__price--parcel">
+                        Em até {item.installments}
+                      </span>
+                      <div className="product__sizes">
+                        {item.sizes.map((size) => {
+                          return (
+                            size.available && (
+                              <div key={size.sku} className="product__size">
+                                <button
+                                  onClick={() => handleSelectSize(size.size)}
+                                  className="btn-sizes btn-sizes--normal"
+                                >
+                                  {size.size}
+                                </button>
+                              </div>
+                            )
+                          );
+                        })}
+                      </div>
+
+                      <div
+                        className={
+                          showNoSizeSelectedAlert
+                            ? "alert-danger"
+                            : "alert-danger--hide"
                         }
-                        alt="Null"
-                      />
-                    )}
-                  </figure>
-                  <section className="product__description">
-                    <strong className="product__name">{item.name}</strong>
-                    <span className="product__price">{item.actual_price}</span>
-                    <span className="product__price product__price--parcel">
-                      Em até {item.installments}
-                    </span>
-                    <div className="product__sizes">
-                      {item.sizes.map((size) => {
-                        return (
-                          size.available && (
-                            <div className="product__size">
-                              <button
-                                key={size.sku}
-                                onClick={() => handleSelectSize(size.size)}
-                                className="btn-sizes btn-sizes--normal"
-                              >
-                                {size.size}
-                              </button>
-                            </div>
-                          )
-                        );
-                      })}
-                    </div>
+                      >
+                        <FiX
+                          className="icon icon--close-alert"
+                          onClick={() => setShowNoSizeSelectedAlert(false)}
+                        />
+                        Selecione um tamanho !
+                      </div>
 
-                    <div
-                      className={
-                        showNoSizeSelectedAlert
-                          ? "alert-danger"
-                          : "alert-danger--hide"
-                      }
-                    >
-                      <FiX
-                        className="icon icon--close-alert"
-                        onClick={() => setShowNoSizeSelectedAlert(false)}
-                      />
-                      Selecione um tamanho !
-                    </div>
-
-                    <button
-                      id="btn"
-                      className="btn btn--bag"
-                      onClick={() => handleAddProductToCart(item, selectedSize)}
-                    >
-                      Adicionar ao carrinho
-                    </button>
-                    <Link className="link link--back" to="/">
-                      <FiArrowLeft className="icon icon--back" />
-                      Voltar para home
-                    </Link>
-                  </section>
+                      <button
+                        id="btn"
+                        className="btn btn--bag"
+                        onClick={() =>
+                          handleAddProductToCart(item, selectedSize)
+                        }
+                      >
+                        Adicionar ao carrinho
+                      </button>
+                      <Link className="link link--back" to="/">
+                        <FiArrowLeft className="icon icon--back" />
+                        Voltar para home
+                      </Link>
+                    </section>
+                  </div>
                 </div>
               );
             }

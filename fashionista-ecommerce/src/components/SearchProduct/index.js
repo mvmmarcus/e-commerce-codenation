@@ -32,7 +32,6 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
     if (searchName !== "" && filteredItems.length === 0) {
       setIsSearching(true);
     }
-
     if (debouncedSearchTerm) {
       setTimeout(() => {
         dispatch(filterProducts(products, debouncedSearchTerm));
@@ -136,7 +135,12 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
                           />
                         </Link>
                       ) : (
-                        <Link to={`/products/${item.id}`}>
+                        <Link
+                          onClick={() =>
+                            dispatch(modalsActions.handleCloseSearch())
+                          }
+                          to={`/products/${item.id}`}
+                        >
                           <img
                             className="search-product__img"
                             src={item.image}
@@ -146,7 +150,16 @@ export default function SearchProduct({ id = "modal", showSearch, products }) {
                       )}
                     </figure>
                     <section className="search-product__description">
-                      <span className="search-product__name">{item.name}</span>
+                      <Link
+                        onClick={() =>
+                          dispatch(modalsActions.handleCloseSearch())
+                        }
+                        to={`/products/${item.id}`}
+                        className="search-product__name"
+                      >
+                        <span>{item.name}</span>
+                      </Link>
+
                       <div className="search-product__pricing">
                         <span className="search-product__parcel-price">
                           Em até {item.installments}

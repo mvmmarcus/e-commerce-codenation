@@ -109,24 +109,35 @@ export default function CartModal({ id = "modal", cartProducts, showCart }) {
                     </figure>
 
                     <section className="cart-product__description">
-                      <span className="cart-product__name">
-                        {item.product.name}
-                      </span>
+                      <Link
+                        className="cart-product__name"
+                        onClick={() =>
+                          dispatch(modalsActions.handleCloseCart())
+                        }
+                        to={`/products/${item.product.id}`}
+                      >
+                        <span>{item.product.name}</span>
+                      </Link>
                       <span className="cart-product__selected-size">
                         Tam: {item.selectedSize}
                       </span>
                       <div className="cart-product__qty">
-                        <FiMinus
-                          className="icon--less"
+                        <button
                           onClick={() => handleDecrementCount(item.cartId)}
-                        />
+                          className="cart-product__button"
+                        >
+                          <FiMinus />
+                        </button>
                         <span className="cart-product__counter">
                           {item.qty}
                         </span>
-                        <FiPlus
-                          className="icon--more"
+
+                        <button
                           onClick={() => handleIncrementCount(item.cartId)}
-                        />
+                          className="cart-product__button"
+                        >
+                          <FiPlus />
+                        </button>
                       </div>
                       {item.product.regular_price !==
                       item.product.actual_price ? (

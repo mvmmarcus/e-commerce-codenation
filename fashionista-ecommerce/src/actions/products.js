@@ -4,20 +4,18 @@ import api from "../services/api";
 export const fetchProducts = () => {
   return (dispatch) => {
     dispatch({ type: actionsTypes.PRODUCTS_FETCH_LOADING });
-    setTimeout(() => {
-      api().then(
-        (response) =>
-          dispatch({
-            type: actionsTypes.PRODUCTS_FETCH_SUCESS,
-            payload: response.data, // aqui é onde eu "escolho" qual objeto eu quero pegar da resposta da api
-          }),
-        (error) =>
-          dispatch({
-            type: actionsTypes.PRODUCTS_FETCH_ERROR,
-            error: error.messages || "Unexpected Error!",
-          })
-      );
-    }, 300);
+    api().then(
+      (response) =>
+        dispatch({
+          type: actionsTypes.PRODUCTS_FETCH_SUCESS,
+          payload: response.data,
+        }),
+      (error) =>
+        dispatch({
+          type: actionsTypes.PRODUCTS_FETCH_ERROR,
+          error: error.messages || "Unexpected Error!",
+        })
+    );
   };
 };
 
@@ -60,19 +58,3 @@ export const onSelectSize = (size) => {
     });
   };
 };
-
-/*import { actionsTypes } from "../constants/products";
-import { fetchProducts } from "../services/api";
-
-const productsActions = {
-  getProducts: (data) => {
-    return {
-      type: actionsTypes.PRODUCTS_FETCH_SUCESS,
-      payload: {
-        data: data
-      },
-    };
-  },
-};
-
-export { productsActions };*/

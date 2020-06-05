@@ -11,6 +11,7 @@ import { productsSelectors } from "../../selectors/products";
 import { cartProductsSelectors } from "../../selectors/cartProducts";
 
 import { modalsSelectors } from "../../selectors/modals";
+import Loading from "../../components/Loading";
 
 export default function Home() {
   const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
@@ -45,9 +46,7 @@ export default function Home() {
   return (
     <div className="container">
       {loading ? (
-        <div className="loading">
-          <div className="loading__indeterminate"></div>
-        </div>
+        <Loading />
       ) : (
         <>
           <Header cartProductsCounter={cartCounter} showCart={showCart} />

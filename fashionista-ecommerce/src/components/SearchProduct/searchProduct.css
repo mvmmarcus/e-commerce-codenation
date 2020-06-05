@@ -102,10 +102,19 @@
 }
 
 .search-product__name {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 14px;
   margin-bottom: 10px;
+  text-decoration: none;
+  color: #41414d;
+}
+
+.search-product__name:hover {
+  text-decoration: underline;
+}
+
+.search-product__name span {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .search-product__pricing {
@@ -117,11 +126,9 @@
 .search-product__parcel-price {
   font-size: 12px;
   margin-top: 5px;
-  color: red;
 }
 
 .search-product__price {
-  color: #41414d;
   text-decoration: none;
   font-weight: 500;
   font-size: 16px;

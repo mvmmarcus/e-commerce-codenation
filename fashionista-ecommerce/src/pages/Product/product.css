@@ -1,12 +1,10 @@
 .product {
   width: 100%;
-  max-width: 1170px;
   min-height: 100vh;
-  padding-top: 70px;
+  padding: 10px 5px 0;
   display: flex;
   justify-content: center;
   background: #fff;
-  margin: 0;
 }
 
 .product__poster {
@@ -162,15 +160,11 @@
     transform: scale(0);
   }
 
-  .container {
-    width: 100%;
-    flex-direction: column;
-  }
-
   .product {
+    padding-bottom: 20px;
+    min-height: auto;
     display: flex;
-    min-height: 100vh;
-    padding: 70px 10px 40px;
+    justify-content: initial;
     flex-direction: column;
     align-items: center;
   }

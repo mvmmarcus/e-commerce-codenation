@@ -1,11 +1,3 @@
-import React from "react";
+import Loading from "./Loading";
 
-import "./loading.css";
-
-export default function Loading() {
-  return (
-    <div className="loading">
-      <div className="loading__indeterminate"></div>
-    </div>
-  );
-}
+export default Loading;

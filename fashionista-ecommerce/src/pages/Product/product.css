@@ -1,4 +1,4 @@
-.product {
+.selected-product {
   width: 100%;
   min-height: 100vh;
   padding: 10px 5px 0;
@@ -7,7 +7,7 @@
   background: #fff;
 }
 
-.product__poster {
+.selected-product__poster {
   width: 100%;
   height: 100%;
   max-width: 400px;
@@ -15,12 +15,12 @@
   cursor: pointer;
 }
 
-.product__img {
+.selected-product__img {
   width: 100%;
   height: auto;
 }
 
-.product__description {
+.selected-product__description {
   width: 100%;
   max-width: 280px;
   line-height: 20px;
@@ -32,24 +32,24 @@
   color: #41414d;
 }
 
-.product__name {
+.selected-product__name {
   font-size: 16px;
   font-weight: 500;
 }
 
-.product__price {
+.selected-product__price {
   margin-top: 10px;
   font-weight: 500;
   font-size: 16px;
 }
 
-.product__price--parcel {
+.selected-product__price--parcel {
   opacity: 0.6;
   margin-top: 10px;
   font-size: 14px;
 }
 
-.product__sizes {
+.selected-product__sizes {
   width: 100%;
   padding: 10px;
   display: flex;
@@ -58,7 +58,7 @@
   align-items: center;
 }
 
-.product__size {
+.selected-product__size {
   padding: 5px;
 }
 
@@ -109,7 +109,7 @@
 .btn--bag {
   background: #039703;
   width: 90%;
-  margin-top: 10px;
+  margin: 10px 0 20px;
   padding: 10px;
   color: #fff;
   border: none;
@@ -120,8 +120,6 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: #41414d;
-  margin-top: 20px;
   color: #41414d;
   text-decoration: none;
   font-size: 14px;
@@ -139,7 +137,7 @@
 
 @media (max-width: 635px) {
   .link--back {
-    margin: 0;
+    margin-bottom: 10px;
   }
 
   .alert-danger {
@@ -160,16 +158,16 @@
     transform: scale(0);
   }
 
-  .product {
+  .selected-product {
     padding-bottom: 20px;
-    min-height: auto;
+    height: auto;
     display: flex;
     justify-content: initial;
     flex-direction: column;
     align-items: center;
   }
 
-  .product__poster {
+  .selected-product__poster {
     width: 100%;
     max-width: 440px;
     height: 100%;
@@ -183,7 +181,7 @@
     height: auto;
   }
 
-  .product__description {
+  .selected-product__description {
     margin-bottom: 20px;
   }
 
@@ -191,6 +189,7 @@
     position: fixed;
     width: 90%;
     bottom: 10px;
+    margin-bottom: 0;
     border-radius: 5px;
   }
 }

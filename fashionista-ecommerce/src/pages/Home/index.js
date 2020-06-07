@@ -1,21 +1,19 @@
 import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-import "./home.css";
 import { Link } from "react-router-dom";
 import { FiArrowUp } from "react-icons/fi";
-import CartModal from "../../components/CartModal";
-import SearchProduct from "../../components/SearchProduct";
+import CartModal from "../../containers/CartModal";
 import { useSelector } from "react-redux";
 import { productsSelectors } from "../../selectors/products";
-import { cartProductsSelectors } from "../../selectors/cartProducts";
-
 import { modalsSelectors } from "../../selectors/modals";
 import Loading from "../../components/Loading";
+import Products from "../../containers/Products";
+
+import "./home.css";
+import SearchModal from "../../containers/SearchModal";
 
 export default function Home() {
-  const cartCounter = useSelector(cartProductsSelectors.getCartCounter);
-  const cartProducts = useSelector(cartProductsSelectors.getCartProducts);
   const products = useSelector(productsSelectors.getProducts);
   const loading = useSelector(productsSelectors.loading);
   const showCart = useSelector(modalsSelectors.getCartModalState);
@@ -49,68 +47,20 @@ export default function Home() {
         <Loading />
       ) : (
         <>
-          <Header cartProductsCounter={cartCounter} showCart={showCart} />
+          <Header/>
 
           {showCart && <div className="back-drop"></div>}
-          <CartModal cartProducts={cartProducts} showCart={showCart} />
+          <CartModal />
 
           {showSearch && <div className="back-drop"></div>}
-          <SearchProduct products={products} showSearch={showSearch} />
+          <SearchModal />
           <div className="content">
             <div className="catalog">
               <>
                 <span className="catalog__counter">
                   {products.length} itens
                 </span>
-                <ul className="catalog__list">
-                  {products.map((item) => (
-                    <li key={item.id} className="catalog__item">
-                      <Link to={`products/${item.id}`}>
-                        <figure className="catalog__poster">
-                          {!item.image ? (
-                            <img
-                              className="catalog__img catalog__img--null"
-                              src={
-                                "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+Indisponível"
-                              }
-                              alt="Null"
-                            />
-                          ) : (
-                            <img
-                              className="catalog__img"
-                              src={item.image}
-                              alt="product"
-                            />
-                          )}
-                          <div className="catalog__seal">
-                            {item.discount_percentage && (
-                              <span>-{item.discount_percentage}</span>
-                            )}
-                          </div>
-                        </figure>
-                      </Link>
-                      <div className="catalog__description">
-                        <strong className="catalog__name">{item.name}</strong>
-                        <div className="catalog__pricing">
-                          {item.regular_price !== item.actual_price ? (
-                            <>
-                              <span className="catalog__price">
-                                {item.regular_price}
-                              </span>
-                              <span className="catalog__price catalog__price--promo">
-                                {item.actual_price}
-                              </span>
-                            </>
-                          ) : (
-                            <span className="catalog__price catalog__price--promo">
-                              {item.regular_price}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <Products />
               </>
             </div>
           </div>

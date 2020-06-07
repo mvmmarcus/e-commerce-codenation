@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   filteredItems: [],
   name: "",
   selectedSize: "",
+  showAddCartAlert: false,
 };
 
 const productsReducers = (state = INITIAL_STATE, action) => {
@@ -55,6 +56,19 @@ const productsReducers = (state = INITIAL_STATE, action) => {
         selectedSize: action.payload.size,
       };
     }
+    case actionsTypes.SHOW_ADD_CART_ALERT: {
+      return {
+        ...state,
+        showAddCartAlert: true,
+      };
+    }
+    case actionsTypes.HIDE_ADD_CART_ALERT: {
+      return {
+        ...state,
+        showAddCartAlert: false,
+      };
+    }
+
     default:
       return state;
   }

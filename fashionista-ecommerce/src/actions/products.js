@@ -58,3 +58,19 @@ export const onSelectSize = (size) => {
     });
   };
 };
+
+export const showAddCartAlert = () => {
+  return (dispatch) => {
+    dispatch({
+      type: actionsTypes.SHOW_ADD_CART_ALERT,
+    });
+  };
+};
+
+export const hideAddCartAlert = () => {
+  return (dispatch) => {
+    dispatch({
+      type: actionsTypes.HIDE_ADD_CART_ALERT,
+    });
+  };
+};

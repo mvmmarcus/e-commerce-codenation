@@ -3,13 +3,13 @@ import { createSelector } from "reselect";
 const calculateTotal = createSelector(
   (state) => state.cartProductsReducers.cartProducts,
   (cartProducts) => {
-    return cartProducts.reduce(
+    return cartProducts?.reduce(
       (subtotal, item) =>
         subtotal +
         (parseInt(
           item.product.actual_price
             .split("")
-            .filter((n) => Number(n))
+            ?.filter((n) => Number(n))
             .join("")
         ) /
           10) *
@@ -22,7 +22,7 @@ const calculateTotal = createSelector(
 const calculateCounter = createSelector(
   (state) => state.cartProductsReducers.cartProducts,
   (cartProducts) => {
-    return cartProducts.reduce((counter, item) => counter + item.qty, 0);
+    return cartProducts?.reduce((counter, item) => counter + item.qty, 0);
   }
 );
 

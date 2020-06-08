@@ -6,7 +6,7 @@ import { modalsActions } from "../../actions/modals";
 export default function SearchProduct({ item }) {
   const dispatch = useDispatch();
   return (
-    <div className="search-product">
+    <div data-testid="search-product" className="search-product">
       <figure
         onClick={() => dispatch(modalsActions.handleCloseSearch())}
         className="search-product__poster"

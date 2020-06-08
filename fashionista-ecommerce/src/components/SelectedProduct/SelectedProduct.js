@@ -58,7 +58,7 @@ export default function SelectedProduct({ item }) {
   };
 
   return (
-    <div className="selected-product">
+    <div data-testid="selected-product" className="selected-product">
       <ImgModal key={item.id} item={item} />
       <>
         <figure
@@ -88,7 +88,7 @@ export default function SelectedProduct({ item }) {
             Em até {item.installments}
           </span>
           <div className="selected-product__sizes">
-            {item.sizes.map((size) => {
+            {item.sizes?.map((size) => {
               return (
                 size.available && (
                   <div key={size.sku} className="selected-product__size">

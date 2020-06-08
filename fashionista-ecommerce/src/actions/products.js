@@ -35,7 +35,7 @@ export const filterProducts = (products, name) => {
     dispatch({
       type: actionsTypes.PRODUCTS_FILTER_BY_NAME,
       payload: {
-        items: products.filter(
+        items: products?.filter(
           (item) =>
             item.name
               .toLowerCase()

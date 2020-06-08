@@ -54,22 +54,22 @@ const cartProductsReducers = (state = INITIAL_STATE, action) => {
         };
       }
       return {
-        cartProducts: state.cartProducts.map((item) => cartItem(item, action)),
+        cartProducts: state.cartProducts?.map((item) => cartItem(item, action)),
       };
     case actionsTypes.REMOVE_FROM_CART:
       return {
-        cartProducts: state.cartProducts.filter((item) =>
+        cartProducts: state.cartProducts?.filter((item) =>
           cartItem(item, action)
         ),
       };
     case actionsTypes.INCREMENT_COUNT_CART_ITEM:
       return {
-        cartProducts: state.cartProducts.map((item) => cartItem(item, action)),
+        cartProducts: state.cartProducts?.map((item) => cartItem(item, action)),
       };
 
     case actionsTypes.DECREMENT_COUNT_CART_ITEM:
       return {
-        cartProducts: state.cartProducts.map((item) => {
+        cartProducts: state.cartProducts?.map((item) => {
           return item.qty > 1 ? cartItem(item, action) : item;
         }),
       };

@@ -5,7 +5,7 @@ import "./footer.css";
 
 export default function Footer() {
   return (
-    <div className="footer">
+    <div data-testid="footer" className="footer">
       Contato
       <>
         <div className="footer__icons">

@@ -8,7 +8,7 @@ export const addItemToCart = (product, size) => {
         ? cartProducts[cartProducts.length - 1].cartId + 1
         : 0;
 
-    const cartIndex = cartProducts.findIndex(
+    const cartIndex = cartProducts?.findIndex(
       (item) => item.product.name === product.name && item.selectedSize === size
     );
     let id = 0;

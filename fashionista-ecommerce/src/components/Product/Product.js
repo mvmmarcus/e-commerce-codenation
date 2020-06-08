@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Product({ item }) {
   return (
-    <li key={item.id} className="catalog__item">
+    <li data-testid="product" key={item.id} className="catalog__item">
       <Link to={`products/${item.id}`}>
         <figure className="catalog__poster">
           {!item.image ? (

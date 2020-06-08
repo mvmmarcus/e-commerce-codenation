@@ -15,7 +15,7 @@ export default function Header() {
   const dispatch = useDispatch();
 
   return (
-    <div className="header">
+    <div data-testid="header" className="header">
       <div className="header__content">
         <>
           <Link className="link link--home" to="/">

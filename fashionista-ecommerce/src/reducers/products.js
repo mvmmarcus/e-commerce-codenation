@@ -22,7 +22,7 @@ const productsReducers = (state = INITIAL_STATE, action) => {
     case actionsTypes.PRODUCTS_FETCH_SUCESS: {
       return {
         ...state,
-        products: action.payload.map((item, index) => {
+        products: action.payload?.map((item, index) => {
           return {
             id: index,
             ...item,

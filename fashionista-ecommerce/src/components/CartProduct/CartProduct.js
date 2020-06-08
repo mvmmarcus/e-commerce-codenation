@@ -17,7 +17,7 @@ export default function CartProduct({ item }) {
   };
 
   return (
-    <div className="cart-product">
+    <div data-testid="cart-product" className="cart-product">
       <figure className="cart-product__poster">
         {!item.product.image ? (
           <Link

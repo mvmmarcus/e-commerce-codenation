@@ -1,4 +1,4 @@
-# React / Redux Fashionista E-commerce
+# Fashionista E-commerce
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0c1a8604-45ef-4293-8f93-6ec7f2e26e24/deploy-status)](https://app.netlify.com/sites/fashionista-codenation-marcus/deploys)
 
